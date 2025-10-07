@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Hub - Ingenious Americas</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- AOS - Animate On Scroll Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container position-relative">
+        <!-- Header Section -->
+        <div class="header-container">
+            <!-- Weather Widget -->
+            <div class="weather-widget" data-aos="fade-up" data-aos-delay="100">
+                <h5>Clima en Montevideo</h5>
+                <div id="weather-info"></div>
+            </div>
+
+            <!-- Title and Subtitle -->
+            <div class="header-content">
+                <h1 data-aos="fade-down">IT Hub</h1>
+                <p class="uy-reference" data-aos="fade-up">Ingenious Americas - Uruguay</p>
+            </div>
+
+            <!-- News Ticker -->
+            <div class="news-ticker" data-aos="fade-up" data-aos-delay="200">
+                <h5>Últimas noticias</h5>
+                <div id="news-ticker-content"></div>
+            </div>
+
+            <!-- Logo and Meet Icon -->
+            <div class="logo-container" data-aos="fade-left">
+                <a href="https://meet.google.com/xsq-jwpw-mpp?authuser=0" target="_blank" class="meet-icon">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="https://www.linkedin.com/company/ingenious-americas/?originalSubdomain=uy" target="_blank">
+                    <img src="logo.png" alt="Logo Ingenious Americas">
+                </a>
+            </div>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="row">
+            <!-- Tickets Card -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100" data-section="tickets">
+                    <div class="card-body">
+                        <h5 class="card-title">Tickets</h5>
+                        <a href="http://10.8.150.251/osticket/scp/tickets.php" class="card-link" target="_blank">
+                            <i class="fa-solid fa-ticket"></i> 
+                            <span>Ticket server</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admins Card -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100" data-section="admins">
+                    <div class="card-body">
+                        <h5 class="card-title">Admins</h5>
+                        <a href="https://admin.8x8.com/" class="card-link" target="_blank">
+                            <i class="fa-solid fa-gear"></i> 
+                            <span>Admin 8x8</span>
+                        </a>
+                        <a href="https://admin.google.com/ac/home?hl=en" class="card-link" target="_blank">
+                            <i class="fa-brands fa-google"></i> 
+                            <span>Admin Google</span>
+                        </a>
+                        <a href="https://10.8.10.66:9111/html/pgmain/index.htm" class="card-link" target="_blank">
+                            <i class="fa-solid fa-shield-virus"></i> 
+                            <span>Seqrite</span>
+                        </a>
+                        <a href="https://www.dropbox.com/home/Alexis%20Navarro/IT" class="card-link" target="_blank">
+                            <i class="fa-brands fa-dropbox"></i> 
+                            <span>DropBox</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servers & VM's Card -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card h-100" data-section="servers">
+                    <div class="card-body">
+                        <h5 class="card-title">Servers & VM's</h5>
+                        <a href="https://10.8.10.80/ui/#/login" class="card-link" target="_blank">
+                            <i class="fa-solid fa-server"></i> 
+                            <span>ESXi 10.80</span>
+                        </a>
+                        <a href="https://10.8.10.240:8006/#v1:0:18:4:=jsconsole:=contentImages:::::" class="card-link" target="_blank">
+                            <i class="fa-brands fa-linux"></i> 
+                            <span>ProxMox 10.240</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventario Card -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="card h-100" data-section="inventario">
+                    <div class="card-body">
+                        <h5 class="card-title">Inventario</h5>
+                        <a href="http://10.8.10.243/hardware?page=1&size=150&order=desc&sort=model&search=" class="card-link" target="_blank">
+                            <i class="fa-solid fa-boxes-stacked"></i> 
+                            <span>Snipe IT</span>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1gvYCX_-y-V7Y8U6ZJGIoRfdX_RIeQlMX/edit?gid=657469519#gid=657469519" class="card-link" target="_blank">
+                            <i class="fa-solid fa-file-excel"></i> 
+                            <span>Assets</span>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/134fY3R4ENP2g2L1TnxAiNPl5hPKp02zg8YpVgIe_n_A/edit?gid=0#gid=0" class="card-link" target="_blank">
+                            <i class="fa-solid fa-laptop-code"></i> 
+                            <span>Laptop Agreement</span>
+                        </a>
+                        <a href="https://app.pandadoc.com/a/#/templates/EbbCDgUJ6sm5vHdkbLiEKZ" class="card-link" target="_blank">
+                            <i class="fa-solid fa-file-signature"></i> 
+                            <span>Pandadoc</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monitoring Card -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="card h-100" data-section="monitoring">
+                    <div class="card-body">
+                        <h5 class="card-title">Monitoring</h5>
+                        <a href="http://10.8.10.241/zabbix.php?name=&ip=&dns=&port=&status=-1&evaltype=0&tags%5B0%5D%5Btag%5D=&tags%5B0%5D%5Boperator%5D=0&tags%5B0%5D%5Bvalue%5D=&maintenance_status=1&filter_name=&filter_show_counter=0&filter_custom_time=0&sort=name&sortorder=ASC&show_suppressed=0&action=host.view" class="card-link" target="_blank">
+                            <i class="fa-solid fa-chart-line"></i> 
+                            <span>Zabbix</span>
+                        </a>
+                        <a href="chrome-extension://moffahdcgnjnglbepimcggkjacdmpojc/ieability.html?url=http%3A%2F%2F10.8.1.111%2Fdoc%2Fpage%2Fpreview.asp" class="card-link" target="_blank">
+                            <i class="fa-solid fa-camera"></i> 
+                            <span>Camara</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sheets Card -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="card h-100" data-section="sheets">
+                    <div class="card-body">
+                        <h5 class="card-title">Sheets</h5>
+                        <a href="https://docs.google.com/spreadsheets/d/1dTwTerrc_UNTFnr0a9jOvPi3OOaSA911phVvE1Bv0Fw/edit?gid=0#gid=0" class="card-link" target="_blank">
+                            <i class="fa-solid fa-file-import"></i> 
+                            <span>Incoming</span>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1rMD9Ag9ccKQPuTLDXg--NlgB3PuDbAjHX0NDl3WqMVg/edit?gid=0#gid=0" class="card-link" target="_blank">
+                            <i class="fa-solid fa-user-plus"></i> 
+                            <span>New Hires</span>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1BN-t93ztD2GX3KP4XvBnDKY-d59-_4ZFrcs9nfV7c6Q/edit?gid=1096513136#gid=1096513136" class="card-link" target="_blank">
+                            <i class="fa-solid fa-map-location-dot"></i> 
+                            <span>Map</span>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/11fYiuonYnWC8dSDAKklyuVdVSPkK1Uhh/edit?gid=495663830#gid=495663830" class="card-link" target="_blank">
+                            <i class="fa-solid fa-sitemap"></i> 
+                            <span>Org Chart</span>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1QXGr98PUMRp06KVMqGYIerY45PzWzfdY8NrKE5LKckw/edit?gid=0#gid=0" class="card-link" target="_blank">
+                            <i class="fa-solid fa-cart-shopping"></i> 
+                            <span>Purchases and Trips</span>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1gvYCX_-y-V7Y8U6ZJGIoRfdX_RIeQlMX/edit?gid=657469519#gid=657469519" class="card-link" target="_blank">
+                            <i class="fa-solid fa-file-invoice-dollar"></i> 
+                            <span>Assets sheet</span>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/19hTfgR7V3ZCwIvli5QpE448nkYyeGIZemXZBhD_Rego/edit?gid=1826738508#gid=1826738508" class="card-link" target="_blank">
+                            <i class="fa-solid fa-users"></i> 
+                            <span>8x8 Monthly Users</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-animation"></div>
+            <p>Hecho con <i class="fas fa-heart text-danger"></i> por los Panas de Soporte Inyinius | 2025</p>
+        </div>
+        
+        <!-- Tech pulse animation -->
+        <div class="tech-pulse"></div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS - Animate On Scroll Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="scripts.js"></script>
+</body>
+</html>

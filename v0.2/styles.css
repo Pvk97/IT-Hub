@@ -1,0 +1,727 @@
+/* styles.css */
+
+/* Custom styles */
+:root {
+    --primary-dark: #001f3f;
+    --secondary-dark: #004080;
+    --primary-light: #f8f9fa;
+    --accent-dark: #007bff;
+    --accent-light: #0056b3;
+    --hover-dark: #0069d9;
+    --hover-light: #003d80;
+    --text-dark: #fff;
+    --text-light: #212529;
+    --card-bg-dark: rgba(15, 23, 42, 0.7);
+    --card-bg-light: #ffffff;
+    --transition-speed: 0.3s;
+}
+
+body {
+    padding-top: 20px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+    color: var(--text-dark);
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    transition: background var(--transition-speed) ease;
+}
+
+/* Light Mode */
+[data-bs-theme="light"] body {
+    background: linear-gradient(135deg, #e0e8f9, var(--primary-light));
+    color: var(--text-light);
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    background-color: rgba(26, 32, 44, 0.8);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all var(--transition-speed) ease;
+}
+
+[data-bs-theme="light"] .container {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column; /* Apila elementos verticalmente por defecto */
+    align-items: center;    /* Centra elementos horizontalmente */
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+ [data-bs-theme="light"] .header-container {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) { /* Para pantallas medianas y grandes */
+    .header-container {
+        flex-direction: row; /* Alinea elementos horizontalmente */
+        justify-content: space-between; /* Distribuye el espacio */
+    }
+}
+
+.header-content {
+    text-align: center;
+     /*flex-grow: 1;  <- Ya no es necesario porque el wrapper maneja esto */
+    margin-bottom: 1rem; /* Agrega espacio debajo del título */
+}
+
+
+h1 {
+    color: var(--accent-dark);
+    margin-bottom: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    letter-spacing: -0.5px;
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 3px;
+    background-color: var(--accent-dark);
+    bottom: -5px;
+    left: 20%;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+h1:hover::after {
+    width: 80%;
+}
+
+[data-bs-theme="light"] h1 {
+    color: var(--accent-light);
+}
+
+[data-bs-theme="light"] h1::after {
+    background-color: var(--accent-light);
+}
+
+.uy-reference {
+    color: #6c757d;
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-top: 5px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+[data-bs-theme="light"] .uy-reference {
+    color: #343a40;
+}
+
+.card-title {
+    color: var(--accent-dark);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.card-title::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent-dark);
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.card:hover .card-title::after {
+    width: 80px;
+}
+
+[data-bs-theme="light"] .card-title {
+    color: var(--accent-light);
+}
+
+[data-bs-theme="light"] .card-title::after {
+    background-color: var(--accent-light);
+}
+
+.card {
+    margin-bottom: 1.5rem;
+    border: none;
+    transition: all var(--transition-speed) ease;
+    background-color: var(--card-bg-dark);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(140deg, rgba(0, 123, 255, 0.1), rgba(0, 80, 170, 0));
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+[data-bs-theme="light"] .card {
+    background-color: var(--card-bg-light);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+[data-bs-theme="light"] .card:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="light"] .card::before {
+    background: linear-gradient(140deg, rgba(0, 86, 179, 0.05), rgba(0, 123, 255, 0));
+}
+
+.card-body {
+    padding: 1.5rem;
+    position: relative;
+}
+
+.card-link {
+    color: #b8c7e0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden;
+    margin-left: 0;
+    /* Asegura que todos los elementos estén alineados */
+}
+
+.card-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 0;
+    background-color: var(--accent-dark);
+    transition: width 0.4s ease;
+}
+
+.card-link:hover {
+    color: var(--accent-dark);
+    transform: translateX(5px);
+}
+
+.card-link:hover::before {
+    width: 100%;
+}
+
+[data-bs-theme="light"] .card-link {
+    color: #4a5568;
+}
+
+[data-bs-theme="light"] .card-link:hover {
+    color: var(--accent-light);
+}
+
+[data-bs-theme="light"] .card-link::before {
+    background-color: var(--accent-light);
+}
+
+.card-link i {
+    margin-right: 12px;
+    width: 1.25em;
+    text-align: center;
+    font-size: 1.1em;
+    transition: transform var(--transition-speed) ease;
+}
+
+.card-link:hover i {
+    transform: scale(1.2);
+}
+
+/* Logo */
+.logo-container {
+    margin-left: 0px; /* Se ajusta el margen para centrar */
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-top: 1rem;     /* Agrega espacio arriba del logo */
+    /*  order: 3;  <- Ya no es necesario */
+}
+
+.logo-container img {
+    max-height: 60px;
+    transition: transform var(--transition-speed) ease;
+}
+
+.logo-container:hover img {
+    transform: scale(1.1);
+}
+
+/* Theme Toggle Button */
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0px;/* Se ajusta para que el boton quede bien arriba a la izquierda */
+}
+
+.theme-toggle {
+    background-color: transparent;
+    border: none;
+    color: #ffc107;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease;
+}
+
+.theme-toggle:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.theme-toggle:active {
+    transform: scale(0.9);
+}
+
+[data-bs-theme="light"] .theme-toggle {
+    color: #007bff;
+}
+
+.theme-toggle i {
+    position: relative;
+    z-index: 2;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #6c757d;
+    position: relative;
+    overflow: hidden;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: background var(--transition-speed) ease;
+}
+
+.footer:hover {
+    background-image: url('panas.jpg');
+    /* Cambia por la ruta de tu imagen */
+    background-size: 30%;
+    /* Reducir al 30% */
+    background-position: center;
+    color: white;
+}
+
+[data-bs-theme="light"] .footer {
+    border-top-color: rgba(0, 0, 0, 0.1);
+    color: #343a40;
+}
+
+/* Footer animation */
+.footer-animation {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to right, transparent, var(--accent-dark), transparent);
+    transform: translateX(-100%);
+    animation: none;
+}
+
+.footer.animate .footer-animation {
+    animation: shine 2s ease-in-out forwards;
+}
+
+@keyframes shine {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+[data-bs-theme="light"] .footer-animation {
+    background: linear-gradient(to right, transparent, var(--accent-light), transparent);
+}
+
+/* Tech Pulse Animation */
+.tech-pulse {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(0deg, rgba(0, 123, 255, 0), rgba(0, 123, 255, 0.03));
+    animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Grid section styling */
+.row {
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
+.col-md-4 {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+/* Tech wired background effect */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 25px 25px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+[data-bs-theme="light"] .container::before {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+/* Badge for new items */
+.badge-new {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #dc3545;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: scale(0);
+    animation: popIn 0.5s forwards 0.5s;
+}
+
+@keyframes popIn {
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+.theme-toggle-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        margin: 0;
+        order: 0; /* Coloca el botón de tema arriba en pantallas pequeñas */
+    }
+
+.header-content-wrapper {
+       /*  flex-direction: column; */ /* Apila clima, título y noticias en pantallas pequeñas */
+        align-items: stretch;  /* Asegura que los elementos se estiren */
+        margin-bottom: 1rem;
+    }
+  .weather-widget,
+    .news-ticker {
+        width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+        margin-bottom: 1rem; /* Espacio entre elementos */
+    }
+
+    .logo-container {
+        margin: 15px 0;
+       /*  order: 2; */
+        flex-direction: row;        
+    }
+
+    .header-content {
+        /* order: 1; */
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+
+/* Fondo animado tipo server room */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.1) 10%, transparent 10.01%);
+    background-size: 20px 20px;
+    animation: moveBackground 10s linear infinite;
+    z-index: -1;
+}
+
+@keyframes moveBackground {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+/* Imágenes alegóricas en las secciones */
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.2), transparent);
+    border-radius: 50% 0 0 0;
+    z-index: -1;
+    transition: transform var(--transition-speed) ease;
+    transform: scale(0.6);
+    /* Reducir al 60% */
+}
+
+.card:hover::after {
+    transform: scale(1);
+    /* Escalar al 100% en hover */
+}
+
+.card[data-section="tickets"]::after {
+    background-image: url('tickets-icon.png');
+    background-size: cover;
+}
+
+.card[data-section="admins"]::after {
+    background-image: url('admins-icon.png');
+    background-size: cover;
+}
+
+.card[data-section="servers"]::after {
+    background-image: url('servers-icon.png');
+    background-size: cover;
+}
+
+.card[data-section="inventario"]::after {
+    background-image: url('inventario-icon.png');
+    background-size: cover;
+}
+
+.card[data-section="monitoring"]::after {
+    background-image: url('monitoring-icon.png');
+    background-size: cover;
+}
+
+.card[data-section="sheets"]::after {
+    background-image: url('sheets-icon.png');
+    background-size: cover;
+}
+
+/* Google Meet icon */
+.meet-icon {
+    margin-right: 0px;
+    /* Aumentamos el margen derecho */
+    color: #007bff;
+    font-size: 1.5rem;
+    transition: transform var(--transition-speed) ease;
+}
+
+.meet-icon:hover {
+    transform: scale(1.3);
+    /* Aumentamos el efecto de hover */
+    color: #ffc107;
+    /* Cambiamos el color al hacer hover */
+}
+
+/* Weather widget */
+.weather-widget {
+    margin-top: 0px; /*  remueve el margen superior */
+    margin-bottom: 1rem;    /* Agrega espacio debajo */
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    text-align: center;
+  /*   max-width: 300px; */  /* Se elimina para que ocupe el ancho del contenedor */
+   /*  margin-left: auto; */ /* Se elimina el centrado automatico */
+    /* margin-right: auto; */
+    order: 1;        /*  asegura que este a la izquierda */
+}
+
+.weather-widget h5 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    /* Reducimos el tamaño de la fuente */
+}
+
+/* Estilos para el widget del clima (datos obtenidos por API) */
+.weather-data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.weather-item {
+    text-align: center;
+    min-width: 60px; /* Ancho mínimo para cada elemento */
+}
+
+.weather-item p {
+    margin: 2px 0;
+    font-size: 0.8rem;
+}
+.weather-item .temperature{
+    font-size: 1.2rem;
+    font-weight: bold;
+
+}
+
+
+/* News ticker */
+.news-ticker {
+    margin-top: 0px;/*  remueve el margen superior */
+    margin-bottom: 1rem;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  /*   max-width: 300px; */  /* Se elimina para ocupar el ancho del header */
+    /* margin-left: auto;
+    margin-right: auto; */
+    order: 3;            /*  asegura que este a la derecha */
+    white-space: nowrap; /* Evita saltos de línea */
+
+}
+
+.news-ticker h5 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    /* Reducimos el tamaño de la fuente */
+}
+
+
+/* Estilos para las noticias (Marquee) */
+#news-container {
+    display: inline-block; /* Para que el marquee funcione correctamente */
+    animation: marquee 20s linear infinite; /* Animación de desplazamiento */
+    padding-left: 100%; /* Empieza fuera de la pantalla */
+    will-change: transform; /* Mejora el rendimiento de la animación */
+    white-space: nowrap;
+}
+
+.news-item {
+    display: inline-block; /* Los elementos se muestran en línea */
+    padding-right: 20px;  /* Espacio entre noticias */
+    color: #fff; /* o cualquier otro color que prefieras */
+    text-decoration: none; /* Quita el subrayado de los enlaces */
+    font-size: 0.9rem;
+
+}
+
+.news-item a{
+    color: inherit;
+    text-decoration: none;
+}
+.news-item a:hover{
+     text-decoration: underline;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+
+/* Ripple effect para el boton de cambio de tema (va en styles.css) */
+ @keyframes ripple {
+          0% {
+            transform: scale(0);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(2.5);
+            opacity: 0;
+          }
+        }

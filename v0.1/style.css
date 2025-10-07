@@ -1,0 +1,518 @@
+/* Custom styles */
+:root {
+    --primary-dark: #001f3f;
+    --secondary-dark: #004080;
+    --primary-light: #f8f9fa;
+    --accent-dark: #007bff;
+    --accent-light: #0056b3;
+    --hover-dark: #0069d9;
+    --hover-light: #003d80;
+    --text-dark: #fff;
+    --text-light: #212529;
+    --card-bg-dark: rgba(15, 23, 42, 0.7);
+    --card-bg-light: #ffffff;
+    --transition-speed: 0.3s;
+  }
+  
+  body {
+      padding-top: 20px;
+      /* Gradiente tecnológico sutil */
+      background: linear-gradient(135deg, #08294d, #001f3f); /* Más oscuro */
+      color: var(--text-dark);
+      font-family: 'Roboto', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      transition: background var(--transition-speed) ease;
+  }
+  
+  /* Light Mode */
+  [data-bs-theme="light"] body {
+      background: linear-gradient(135deg, #f0f4fc, #ffffff); /*Un fondo blanco*/
+      color: var(--text-light);
+  }
+  
+  .container {
+      max-width: 1200px;
+      margin: auto;
+      background-color: rgba(26, 32, 44, 0.8);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all var(--transition-speed) ease;
+  }
+  
+  [data-bs-theme="light"] .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  [data-bs-theme="light"] .header-container {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-content {
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  /* Estilos para el botón de cambio de tema */
+  .theme-toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 20px; /* Ajusta según sea necesario */
+  }
+  
+  .theme-toggle {
+      background-color: transparent;
+      border: none;
+      color: #ffc107; /* Color del icono (sol/luna) */
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 50%;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      position: relative; /* Importante para el efecto ripple */
+      overflow: hidden; /* Oculta el exceso del ripple */
+  }
+  
+  /* Efecto "ripple" al hacer clic */
+  .theme-toggle::before {
+      content: '';
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1); /* Color del ripple (claro) */
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.5s ease;
+  }
+  
+  .theme-toggle:hover::before {
+      width: 100%;
+      height: 100%;
+  }
+  .theme-toggle:active {
+    transform: scale(0.9);
+  }
+  
+  [data-bs-theme="light"] .theme-toggle {
+    color: #007bff;
+  }
+  .theme-toggle i {
+    position: relative;
+    z-index: 2;
+  }
+  
+  h1 {
+      color: var(--accent-dark);
+      margin-bottom: 5px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 2.5rem;
+      letter-spacing: -0.5px;
+      position: relative;
+      display: inline-block;
+  }
+  
+  h1::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 3px;
+      background-color: var(--accent-dark);
+      bottom: -5px;
+      left: 20%;
+      border-radius: 2px;
+      transition: width 0.5s ease;
+  }
+  
+  h1:hover::after {
+      width: 80%;
+  }
+  
+  [data-bs-theme="light"] h1 {
+    color: var(--accent-light);
+  }
+  
+  [data-bs-theme="light"] h1::after {
+    background-color: var(--accent-light);
+  }
+  
+  .uy-reference {
+      color: #6c757d;
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-top: 5px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+  }
+  
+  [data-bs-theme="light"] .uy-reference {
+      color: #343a40;
+  }
+  
+  .card-title {
+      color: var(--accent-dark);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+  }
+  
+  .card-title::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 2px;
+      background-color: var(--accent-dark);
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s ease;
+  }
+  
+  .card:hover .card-title::after {
+      width: 80px;
+  }
+  
+  [data-bs-theme="light"] .card-title {
+      color: var(--accent-light);
+  }
+  
+  [data-bs-theme="light"] .card-title::after {
+      background-color: var(--accent-light);
+  }
+  
+  .card {
+      margin-bottom: 1.5rem;
+      border: none;
+      transition: all var(--transition-speed) ease;
+      background-color: var(--card-bg-dark);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      height: 100%;
+      position: relative;
+      z-index: 1;
+  }
+  
+  .card::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(140deg, rgba(0, 123, 255, 0.1), rgba(0, 80, 170, 0));
+      opacity: 0;
+      transition: opacity var(--transition-speed) ease;
+  }
+  
+  .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card:hover::before {
+      opacity: 1;
+  }
+  
+  [data-bs-theme="light"] .card {
+      background-color: var(--card-bg-light);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  [data-bs-theme="light"] .card:hover {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  [data-bs-theme="light"] .card::before {
+      background: linear-gradient(140deg, rgba(0, 86, 179, 0.05), rgba(0, 123, 255, 0));
+  }
+  
+  .card-body {
+      padding: 1.5rem;
+      position: relative;
+  }
+  
+  .card-link {
+      color: #b8c7e0;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0;
+      transition: all var(--transition-speed) ease;
+      position: relative;
+      overflow: hidden;
+      margin-left: 0;
+  }
+  
+  .card-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      width: 0;
+      background-color: var(--accent-dark);
+      transition: width 0.4s ease;
+  }
+  
+  .card-link:hover {
+      color: var(--accent-dark);
+      transform: translateX(5px);
+  }
+  
+  .card-link:hover::before {
+      width: 100%;
+  }
+  
+  [data-bs-theme="light"] .card-link {
+      color: #4a5568;
+  }
+  
+  [data-bs-theme="light"] .card-link:hover {
+      color: var(--accent-light);
+  }
+  
+  [data-bs-theme="light"] .card-link::before {
+      background-color: var(--accent-light);
+  }
+  
+  .card-link i {
+      margin-right: 12px;
+      width: 1.25em;
+      text-align: center;
+      font-size: 1.1em;
+      transition: transform var(--transition-speed) ease;
+  }
+  
+  .card-link:hover i {
+      transform: scale(1.2);
+  }
+  
+  .logo-container {
+    margin-left: 20px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .logo-container img {
+    max-height: 60px;
+    transition: transform var(--transition-speed) ease;
+  }
+    .logo-container a {
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: middle;
+  }
+  
+  /* Estilos para el icono de Google Meet */
+  .logo-container .meet-icon {
+      color: #4285F4; /* Color de Google Meet */
+      font-size: 2em;    /* Tamaño adecuado */
+  }
+  
+  .logo-container .meet-icon:hover {
+      color: #2a5db0; /* Color más oscuro al hacer hover */
+  }
+  
+  .logo-container:hover img {
+    transform: scale(1.1);
+  }
+  
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #6c757d;
+    position: relative;
+    overflow: hidden;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: background var(--transition-speed) ease;
+  }
+  
+  /* Animacion de las imagenes del footer */
+  .footer-images {
+    position: absolute;
+    top: 0;
+    right: -100%;
+    height: 100%;
+    display: flex;
+    gap: 20px;
+    animation: moveImages 10s linear infinite paused;
+  }
+  .footer-images img {
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+      opacity: 0; /* Inicialmente, la imagen es invisible */
+  }
+  .footer:hover .footer-images {
+    animation-play-state: running;
+  }
+  
+  .panas-text:hover + .footer-images img {
+      opacity: 1;  /* Completamente visible al hacer hover en el texto */
+  }
+  
+  @keyframes moveImages {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-150%); }
+  }
+  
+  [data-bs-theme="light"] .footer {
+      border-top-color: rgba(0, 0, 0, 0.1);
+      color: #343a40;
+  }
+  
+  /* Estilos para los widgets */
+  .widgets-container {
+      display: flex;        /* Usamos flexbox */
+      justify-content: space-between; /* Espacio entre los widgets */
+      width: 100%;          /* Ocupa todo el ancho */
+      margin-bottom: 20px; /*  espacio debajo de los widgets */
+  
+  }
+  
+  .weather-widget,
+  .news-ticker {
+      background-color: transparent;
+      border: none;
+      padding: 5px;
+      margin: 0;
+      box-shadow: none;
+      color: inherit;
+      flex: 1;     /* Los widgets se expanden para ocupar el espacio disponible */
+      max-width: 48%; /*  ancho máximo para evitar que sean demasiado anchos */
+  }
+  
+  .weather-widget h5 {
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: inherit;
+  }
+  
+  .weather-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2px;
+  }
+  .weather-item span{
+      font-size: 0.9rem;
+  }
+  
+  .weather-icon {
+      width: 25px;
+      height: 25px;
+  }
+  
+  .news-ticker ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      white-space: nowrap;
+      animation: ticker 20s linear infinite;
+  }
+  
+  .news-ticker li {
+      display: inline-block;
+      margin-right: 20px;
+      font-size: 0.9rem;
+  }
+  
+  .news-ticker a {
+      color: inherit;
+      text-decoration: none;
+  }
+  .news-ticker a:hover{
+      color: var(--accent-dark);
+  }
+  
+  /* Estilos para los iconos de las tarjetas */
+  .card-icon-container {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      z-index: 2;
+      opacity: 0.7;
+  }
+  
+  .card-icon-container img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+  }
+  
+  @media (max-width: 768px) {
+      .header-container {
+          flex-direction: column;
+          text-align: center;
+      }
+      /*  El botón de tema se coloca arriba */
+      .theme-toggle-container {
+          position: static; /* Ya no es absoluto */
+          margin-bottom: 10px; /* Espacio debajo del botón */
+          margin-left: 0;
+      }
+  
+    .logo-container {
+      margin: 15px 0;
+      order: 2;
+    }
+    .header-content {
+      order: 1;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+      .widgets-container {
+          flex-direction: column; /* Los widgets se apilan en pantallas pequeñas */
+      }
+  
+    .weather-widget,
+    .news-ticker {
+      margin-bottom: 10px;
+          max-width: 100%; /* Ocupan todo el ancho en pantallas pequeñas */
+      }
+  
+  }
+  
+  .theme-dependent{
+      /*Just to make sure it works*/
+  }
+  
+  [data-bs-theme="light"] .theme-dependent{
+      /*Just to make sure it works*/
+  }

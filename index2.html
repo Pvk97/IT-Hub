@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Hub - Ingenious Americas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+            animation: bgShift 15s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        /* Grid Pattern */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .app-container { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(71, 85, 105, 0.5);
+            padding: 24px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 100;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+            animation: slideInLeft 0.5s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .sidebar.mobile-hidden { transform: translateX(-100%); }
+
+        .sidebar-header { 
+            margin-bottom: 32px; 
+            text-align: center;
+        }
+        .sidebar-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+        .sidebar-logo:hover {
+            transform: scale(1.05);
+        }
+        .sidebar-title { font-size: 24px; font-weight: 700; color: #3b82f6; margin-bottom: 4px; }
+        .sidebar-subtitle { font-size: 14px; color: #94a3b8; }
+
+        .sidebar-nav { display: flex; flex-direction: column; gap: 8px; }
+        
+        .nav-btn {
+            width: 100%;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: #cbd5e1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-btn:hover::before {
+            transform: scaleY(1);
+        }
+
+        .nav-btn:hover { background: #1e293b; color: #fff; transform: translateX(4px); }
+        .nav-btn.active { 
+            background: #3b82f6; 
+            color: #fff; 
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+        }
+        .nav-btn.active::before { transform: scaleY(1); background: #60a5fa; }
+        .nav-btn i { width: 20px; text-align: center; transition: transform 0.3s ease; }
+        .nav-btn:hover i { transform: scale(1.2); }
+        .nav-btn.active i { animation: bounce 0.6s ease; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top: 1px solid rgba(71, 85, 105, 0.5);
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 101;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(71, 85, 105, 0.5);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+        .header-left p { font-size: 14px; color: #94a3b8; }
+
+        .header-right {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .theme-toggle, .meet-btn {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .theme-toggle {
+            background: #1e293b;
+            color: #fbbf24;
+        }
+
+        .theme-toggle:hover { background: #334155; transform: scale(1.1); }
+
+        .meet-btn {
+            background: #3b82f6;
+            color: white;
+            text-decoration: none;
+        }
+
+        .meet-btn:hover { background: #2563eb; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5); }
+
+        /* Content */
+        .content {
+            padding: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .widget {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 12px;
+            padding: 16px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .widget:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .widget h3 { font-size: 14px; color: #cbd5e1; margin-bottom: 12px; }
+
+        .weather-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .weather-current {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .weather-icon { font-size: 32px; color: #fbbf24; }
+        .weather-temp { font-size: 32px; font-weight: 700; }
+        .weather-label { font-size: 12px; color: #94a3b8; }
+
+        .weather-minmax { text-align: right; font-size: 14px; }
+        .weather-minmax span { font-weight: 600; }
+
+        .news-item {
+            display: block;
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 8px;
+            text-decoration: none;
+            transition: color 0.2s;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .news-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+        }
+
+        .news-item:hover { color: #3b82f6; }
+
+        .news-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .news-list::-webkit-scrollbar { width: 4px; }
+        .news-list::-webkit-scrollbar-track { background: rgba(51, 65, 85, 0.5); border-radius: 4px; }
+        .news-list::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+
+        .news-list li { margin-bottom: 8px; }
+        .news-list a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+            display: block;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .news-list a::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+        }
+
+        .news-list a:hover { color: #3b82f6; }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .stat-icon.blue { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .stat-icon.green { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .stat-icon.purple { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+        .stat-icon.orange { background: rgba(249, 115, 22, 0.2); color: #f97316; }
+
+        .stat-content h4 { font-size: 24px; font-weight: 700; color: #fff; margin: 0; }
+        .stat-content p { font-size: 12px; color: #94a3b8; margin: 0; }
+
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover::after {
+            opacity: 0.3;
+            transform: scale(1.1);
+        }
+
+        .card.tickets-card::after { background-image: url('tickets-icon.png'); }
+        .card.servers-card::after { background-image: url('servers-icon.png'); }
+        .card.monitoring-card::after { background-image: url('monitoring-icon.png'); }
+        .card.admins-card::after { background-image: url('admins-icon.png'); }
+        .card.inventario-card::after { background-image: url('inventario-icon.png'); }
+        .card.sheets-card::after { background-image: url('sheets-icon.png'); }
+
+        .card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+            position: relative;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            animation: titleGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { opacity: 1; width: 60px; }
+            50% { opacity: 0.6; width: 80px; }
+        }
+
+        .card-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .card-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.4s ease;
+        }
+
+        .card-link:hover::before {
+            width: 100%;
+        }
+
+        .card-link:hover {
+            background: rgba(51, 65, 85, 0.7);
+            border-color: rgba(59, 130, 246, 0.5);
+            color: #fff;
+            transform: translateX(8px);
+        }
+
+        .card-link i {
+            width: 20px;
+            text-align: center;
+            color: #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .card-link:hover i {
+            transform: scale(1.2) rotate(5deg);
+            color: #60a5fa;
+        }
+
+        .sheets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .mono { font-family: 'Courier New', monospace; font-size: 13px; }
+
+        /* Light Mode */
+        body.light-mode {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%);
+            color: #1e293b;
+        }
+
+        body.light-mode .sidebar,
+        body.light-mode .header {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(203, 213, 225, 0.5);
+        }
+
+        body.light-mode .sidebar-title { color: #2563eb; }
+        body.light-mode .sidebar-subtitle { color: #64748b; }
+
+        body.light-mode .nav-btn { color: #475569; }
+        body.light-mode .nav-btn:hover { background: #f1f5f9; color: #1e293b; }
+
+        body.light-mode .widget,
+        body.light-mode .card,
+        body.light-mode .card-link {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(203, 213, 225, 0.5);
+        }
+
+        body.light-mode .card-link:hover { background: #f8fafc; }
+
+        body.light-mode .theme-toggle { background: #f1f5f9; color: #f59e0b; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.mobile-open { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .header h1 { font-size: 18px; }
+            .meet-btn span { display: none; }
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(71, 85, 105, 0.5);
+            color: #94a3b8;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .footer:hover {
+            background-image: url('panas.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+            transition: left 0.8s ease;
+        }
+
+        .footer:hover::before {
+            left: 100%;
+        }
+
+        .footer-text {
+            position: relative;
+            z-index: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .heart-icon {
+            color: #ef4444;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="logo.png" alt="Ingenious Americas" class="sidebar-logo">
+                <div class="sidebar-title">IT Hub</div>
+                <div class="sidebar-subtitle">Ingenious Americas</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" onclick="showSection('tickets', this)">
+                    <i class="fas fa-ticket"></i> Tickets
+                </button>
+                <button class="nav-btn" onclick="showSection('servers', this)">
+                    <i class="fas fa-server"></i> Servers & VMs
+                </button>
+                <button class="nav-btn" onclick="showSection('monitoring', this)">
+                    <i class="fas fa-chart-line"></i> Monitoring
+                </button>
+                <button class="nav-btn" onclick="showSection('admins', this)">
+                    <i class="fas fa-shield-alt"></i> Admins
+                </button>
+                <button class="nav-btn" onclick="showSection('inventario', this)">
+                    <i class="fas fa-box"></i> Inventario
+                </button>
+                <button class="nav-btn" onclick="showSection('sheets', this)">
+                    <i class="fas fa-table"></i> Sheets
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                © 2025 Panas de Soporte
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <h1 id="greeting">Buenos días, Usuario</h1>
+                    <p id="current-date"></p>
+                </div>
+                <div class="header-right">
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <a href="https://meet.google.com/xsq-jwpw-mpp?authuser=0" target="_blank" class="meet-btn">
+                        <i class="fas fa-phone"></i>
+                        <span>Panas Team</span>
+                    </a>
+                </div>
+            </header>
+
+            <main class="content">
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-ticket"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4 id="tickets-count">--</h4>
+                            <p>Tickets Abiertos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4 id="servers-count">4</h4>
+                            <p>Servidores Activos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4 id="users-count">--</h4>
+                            <p>Usuarios Activos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4 id="assets-count">--</h4>
+                            <p>Assets en Inventario</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widgets-grid">
+                    <div class="widget">
+                        <h3>Montevideo</h3>
+                        <div class="weather-content" id="weather"></div>
+                    </div>
+                    <div class="widget">
+                        <h3>Últimas Noticias</h3>
+                        <div id="news"></div>
+                    </div>
+                </div>
+
+                <div class="cards-grid" id="content"></div>
+
+                <footer class="footer">
+                    <div class="footer-text">
+                        Hecho con <i class="fas fa-heart heart-icon"></i> por los Panas de Soporte Inyinius | 2025
+                    </div>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // ====== UTILITY FUNCTION ======
+        async function fetchData(url) {
+            try {
+                const response = await fetch(url);
+                return await response.json();
+            } catch (error) {
+                console.error('Fetch error:', error);
+                return null;
+            }
+        }
+
+        // ====== CLIMA ======
+        async function loadWeather() {
+            const weatherBox = document.getElementById("weather");
+            weatherBox.innerHTML = '<p style="color: #94a3b8;">Cargando clima...</p>';
+
+            const url = "https://api.open-meteo.com/v1/forecast?latitude=-34.9&longitude=-56.2&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=America/Montevideo";
+            const data = await fetchData(url);
+
+            if (data && data.current_weather) {
+                const { temperature, windspeed, weathercode } = data.current_weather;
+                const max = data.daily?.temperature_2m_max?.[0];
+                const min = data.daily?.temperature_2m_min?.[0];
+                
+                const getWeatherIcon = (code) => {
+                    if (code === 0) return 'fa-sun';
+                    if (code <= 3) return 'fa-cloud';
+                    if (code <= 67) return 'fa-cloud-rain';
+                    if (code <= 77) return 'fa-snowflake';
+                    if (code >= 95) return 'fa-bolt';
+                    return 'fa-cloud';
+                };
+
+                weatherBox.innerHTML = `
+                    <div class="weather-current">
+                        <i class="fas ${getWeatherIcon(weathercode)} weather-icon"></i>
+                        <div>
+                            <div class="weather-temp">${Math.round(temperature)}°C</div>
+                            <div class="weather-label">Viento: ${windspeed} km/h</div>
+                        </div>
+                    </div>
+                    ${max && min ? `
+                    <div class="weather-minmax">
+                        <div>Max: <span>${Math.round(max)}°</span></div>
+                        <div>Min: <span>${Math.round(min)}°</span></div>
+                    </div>` : ''}
+                `;
+            } else {
+                weatherBox.innerHTML = '<p style="color: #94a3b8;">Clima no disponible</p>';
+            }
+        }
+
+        // ====== NOTICIAS ======
+        async function loadNews() {
+            const newsBox = document.getElementById("news");
+            newsBox.innerHTML = '<p style="color: #94a3b8;">Cargando noticias...</p>';
+
+            const url = "https://newsdata.io/api/1/latest?apikey=pub_bb7cec6cbbff44629f878bdd851096c1&country=uy&language=es&category=politics,sports,top,technology,business";
+            const data = await fetchData(url);
+
+            if (data && data.results) {
+                const newsItems = data.results.slice(0, 5);
+                newsBox.innerHTML = `
+                    <ul class="news-list">
+                        ${newsItems.map(article => `
+                            <li><a href="${article.link}" target="_blank" rel="noopener noreferrer">${article.title}</a></li>
+                        `).join("")}
+                    </ul>`;
+            } else {
+                newsBox.innerHTML = '<p style="color: #94a3b8;">Noticias no disponibles</p>';
+            }
+        }
+
+        // ====== STATS ANIMATION ======
+        function animateCount(elementId, target) {
+            const element = document.getElementById(elementId);
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 20);
+        }
+
+        // Simulate stats (reemplaza con datos reales cuando los tengas)
+        setTimeout(() => {
+            animateCount('tickets-count', 12);
+            animateCount('users-count', 156);
+            animateCount('assets-count', 89);
+        }, 500);
+
+        const sections = {
+            tickets: `
+                <div class="card tickets-card">
+                    <h2 class="card-title">Tickets</h2>
+                    <div class="card-links">
+                        <a href="http://10.8.150.251/osticket/scp/tickets.php" target="_blank" class="card-link">
+                            <i class="fas fa-ticket"></i> Ticket Server
+                        </a>
+                    </div>
+                </div>
+            `,
+            servers: `
+                <div class="card servers-card">
+                    <h2 class="card-title">Servers & VM's</h2>
+                    <div class="card-links">
+                        <a href="https://10.8.10.80/ui/#/login" target="_blank" class="card-link mono">
+                            <i class="fas fa-server"></i> ESXi 10.80
+                        </a>
+                        <a href="https://10.8.10.240:8006/" target="_blank" class="card-link mono">
+                            <i class="fab fa-linux"></i> ProxMox 10.240
+                        </a>
+                    </div>
+                </div>
+            `,
+            monitoring: `
+                <div class="card monitoring-card">
+                    <h2 class="card-title">Monitoring</h2>
+                    <div class="card-links">
+                        <a href="http://10.8.10.241/zabbix.php" target="_blank" class="card-link">
+                            <i class="fas fa-chart-line"></i> Zabbix
+                        </a>
+                        <a href="http://10.8.1.111/doc/page/preview.asp" target="_blank" class="card-link">
+                            <i class="fas fa-camera"></i> Cámara
+                        </a>
+                    </div>
+                </div>
+            `,
+            admins: `
+                <div class="card admins-card">
+                    <h2 class="card-title">Admins</h2>
+                    <div class="card-links">
+                        <a href="https://service.ringcentral.com/application/adminHome/" target="_blank" class="card-link">
+                            <i class="fas fa-phone-alt"></i> Admin Ring Central
+                        </a>
+                        <a href="https://admin.google.com/ac/home?hl=en" target="_blank" class="card-link">
+                            <i class="fab fa-google"></i> Admin Google
+                        </a>
+                        <a href="https://10.8.10.66:9111/html/pgmain/index.htm" target="_blank" class="card-link">
+                            <i class="fas fa-shield-virus"></i> Seqrite
+                        </a>
+                        <a href="https://www.dropbox.com/home/Alexis%20Navarro/IT" target="_blank" class="card-link">
+                            <i class="fab fa-dropbox"></i> DropBox
+                        </a>
+                    </div>
+                </div>
+            `,
+            inventario: `
+                <div class="card inventario-card">
+                    <h2 class="card-title">Inventario</h2>
+                    <div class="card-links">
+                        <a href="http://10.8.10.243/hardware" target="_blank" class="card-link">
+                            <i class="fas fa-boxes-stacked"></i> Snipe IT
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1gvYCX_-y-V7Y8U6ZJGIoRfdX_RIeQlMX/edit" target="_blank" class="card-link">
+                            <i class="fas fa-file-excel"></i> Assets
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/134fY3R4ENP2g2L1TnxAiNPl5hPKp02zg8YpVgIe_n_A/edit" target="_blank" class="card-link">
+                            <i class="fas fa-laptop-code"></i> Laptop Agreement
+                        </a>
+                        <a href="https://app.pandadoc.com/a/#/templates/EbbCDgUJ6sm5vHdkbLiEKZ" target="_blank" class="card-link">
+                            <i class="fas fa-file-signature"></i> Pandadoc
+                        </a>
+                    </div>
+                </div>
+            `,
+            sheets: `
+                <div class="card sheets-card" style="grid-column: 1 / -1;">
+                    <h2 class="card-title">Sheets</h2>
+                    <div class="sheets-grid">
+                        <a href="https://docs.google.com/spreadsheets/d/1dTwTerrc_UNTFnr0a9jOvPi3OOaSA911phVvE1Bv0Fw/edit" target="_blank" class="card-link">
+                            <i class="fas fa-file-import"></i> Incoming
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1rMD9Ag9ccKQPuTLDXg--NlgB3PuDbAjHX0NDl3WqMVg/edit" target="_blank" class="card-link">
+                            <i class="fas fa-user-plus"></i> New Hires
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1BN-t93ztD2GX3KP4XvBnDKY-d59-_4ZFrcs9nfV7c6Q/edit" target="_blank" class="card-link">
+                            <i class="fas fa-map-location-dot"></i> Map
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/11fYiuonYnWC8dSDAKklyuVdVSPkK1Uhh/edit" target="_blank" class="card-link">
+                            <i class="fas fa-sitemap"></i> Org Chart
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1QXGr98PUMRp06KVMqGYIerY45PzWzfdY8NrKE5LKckw/edit" target="_blank" class="card-link">
+                            <i class="fas fa-cart-shopping"></i> Purchases and Trips
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1gvYCX_-y-V7Y8U6ZJGIoRfdX_RIeQlMX/edit" target="_blank" class="card-link">
+                            <i class="fas fa-file-invoice-dollar"></i> Assets Sheet
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/19hTfgR7V3ZCwIvli5QpE448nkYyeGIZemXZBhD_Rego/edit" target="_blank" class="card-link">
+                            <i class="fas fa-users"></i> 8x8 Monthly Users
+                        </a>
+                    </div>
+                </div>
+            `
+        };
+
+        function showSection(section, element) {
+            const content = document.getElementById('content');
+            
+            // En desktop, mostrar todas las secciones
+            if (window.innerWidth >= 768) {
+                content.innerHTML = Object.values(sections).join('');
+            } else {
+                // En mobile, mostrar solo la sección seleccionada
+                content.innerHTML = sections[section];
+            }
+            
+            // Actualizar navegación activa
+            if (element) {
+                document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+                element.classList.add('active');
+                
+                if (window.innerWidth < 768) {
+                    document.getElementById('sidebar').classList.remove('mobile-open');
+                }
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('sidebar').classList.toggle('mobile-open');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const icon = document.querySelector('.theme-toggle i');
+            icon.className = document.body.classList.contains('light-mode') ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        function updateDateTime() {
+            const now = new Date();
+            const hour = now.getHours();
+            const greeting = hour < 12 ? 'Buenos días' : hour < 18 ? 'Buenas tardes' : 'Buenas noches';
+            document.getElementById('greeting').textContent = greeting + ', Usuario';
+            document.getElementById('current-date').textContent = now.toLocaleDateString('es-UY', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            });
+        }
+
+        // Inicialización
+        showSection('tickets');
+        updateDateTime();
+        loadWeather();
+        loadNews();
+        setInterval(updateDateTime, 60000);
+        
+        // Recargar contenido al redimensionar
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                document.getElementById('content').innerHTML = Object.values(sections).join('');
+            }
+        });
+    </script>
+</body>
+</html>

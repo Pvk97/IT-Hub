@@ -1,0 +1,151 @@
+/* =================================================================
+   IT HUB STYLES - v2.2 (Corregido y con identidad visual)
+   ================================================================= */
+
+/* 1. VARIABLES Y ESTILOS GLOBALES */
+:root {
+    --font-family: 'Inter', sans-serif;
+    --sidebar-width: 250px;
+    --border-radius: 12px;
+    --transition-speed: 0.3s;
+    
+    /* Colores temáticos */
+    --blue: #3b82f6;
+    --green: #22c55e;
+    --purple: #8b5cf6;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --cyan: #06b6d4;
+    
+    /* Tema Claro (Default) */
+    --bg-main: #f4f7fa;
+    --bg-sidebar: #ffffff;
+    --bg-card: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(149, 157, 165, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-sidebar: #1e293b;
+    --bg-card: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --shadow-color: rgba(0, 0, 0, 0.25);
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* 2. ESTRUCTURA PRINCIPAL (LAYOUT) */
+.dashboard-layout { display: flex; }
+
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed) ease;
+    z-index: 1020; /* Mayor que el header de Bootstrap si lo hubiera */
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    padding: 1.5rem 2rem;
+    transition: margin-left var(--transition-speed) ease;
+}
+
+/* 3. COMPONENTES */
+
+/* ----- Sidebar ----- */
+.sidebar-header { display: flex; align-items: center; gap: 12px; padding: 1.5rem; border-bottom: 1px solid var(--border-color); }
+.sidebar-logo { width: 32px; }
+.sidebar-title { font-size: 1.25rem; font-weight: 600; }
+.sidebar-nav { flex-grow: 1; padding: 1rem; }
+.nav-link { display: flex; align-items: center; gap: 12px; padding: 0.8rem 1rem; margin-bottom: 0.5rem; border-radius: 8px; font-weight: 500; color: var(--text-secondary); transition: background-color 0.2s, color 0.2s; text-decoration: none; }
+.nav-link:hover, .nav-link.active { background-color: var(--bg-main); color: var(--text-primary); }
+.nav-link i { width: 20px; height: 20px; }
+.sidebar-footer { padding: 1.5rem; text-align: center; color: var(--text-secondary); font-size: 0.875rem; border-top: 1px solid var(--border-color); }
+
+/* ----- Header ----- */
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.header-left { display: flex; align-items: center; gap: 1rem; }
+.menu-toggle { display: none; background: none; border: none; color: var(--text-primary); cursor: pointer; padding: 0.5rem; }
+.header-greeting h2 { font-size: 1.75rem; font-weight: 700; margin: 0; }
+.header-greeting .uy-reference { color: var(--text-secondary); margin: 0; font-weight: 500; }
+.header-right { display: flex; align-items: center; gap: 1.5rem; }
+.header-icon-link { color: var(--text-secondary); transition: color 0.2s; }
+.header-icon-link:hover { color: var(--text-primary); }
+
+/* ----- Dark/Light Mode Toggle ----- */
+.theme-switcher { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); }
+.switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--blue); }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* ----- Widgets y Métricas ----- */
+.widgets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+.metric-card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: 1.2rem; display: flex; align-items: center; gap: 1rem; }
+.metric-icon { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
+.metric-icon[data-bg-color="blue"] { background-color: rgba(59, 130, 246, 0.1); color: var(--blue); }
+.metric-icon[data-bg-color="green"] { background-color: rgba(34, 197, 94, 0.1); color: var(--green); }
+.metric-icon[data-bg-color="yellow"] { background-color: rgba(245, 158, 11, 0.1); color: var(--yellow); }
+.metric-info { display: flex; flex-direction: column; }
+.metric-value { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+.metric-label { color: var(--text-secondary); font-size: 0.875rem; }
+.news-widget ul { list-style: none; padding: 0; margin: 0.25rem 0 0 0; }
+.news-widget a { font-size: 0.875rem; color: var(--text-secondary); transition: color 0.2s; text-decoration: none; }
+.news-widget a:hover { color: var(--blue); }
+
+/* ----- Tarjetas de Contenido con Identidad Visual ----- */
+.card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: 0 4px 12px var(--shadow-color); transition: transform 0.2s ease, box-shadow 0.2s ease; height: 100%; background-repeat: no-repeat; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px var(--shadow-color); }
+.card-title { font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1.2rem; }
+.quick-link { display: flex; align-items: center; gap: 12px; padding: 0.8rem; margin-bottom: 0.25rem; border-radius: 8px; transition: background-color 0.2s; text-decoration: none; color: var(--text-secondary); }
+.quick-link:hover { background-color: var(--bg-main); color: var(--text-primary); }
+.quick-link i { width: 20px; height: 20px; flex-shrink: 0; }
+.quick-link span { font-weight: 500; }
+
+/* Fondos sutiles para cada tarjeta */
+.tickets-card    { background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 60%); }
+.servers-card    { background-image: radial-gradient(circle at top right, rgba(34, 197, 94, 0.08), transparent 60%); }
+.monitoring-card { background-image: radial-gradient(circle at top right, rgba(239, 68, 68, 0.07), transparent 60%); }
+.admins-card     { background-image: radial-gradient(circle at top right, rgba(139, 92, 246, 0.08), transparent 60%); }
+.inventory-card  { background-image: radial-gradient(circle at top right, rgba(245, 158, 11, 0.08), transparent 60%); }
+.sheets-card      { background-image: radial-gradient(circle at top right, rgba(6, 182, 212, 0.08), transparent 60%); }
+
+/* ----- Footer ----- */
+.footer {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+}
+.footer p { display: flex; justify-content: center; align-items: center; gap: 0.3rem; margin: 0; }
+.heart-icon { width: 16px; height: 16px; color: var(--red); fill: var(--red); }
+
+/* 4. RESPONSIVIDAD */
+@media (max-width: 992px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.show { transform: translateX(0); box-shadow: 0 0 40px rgba(0,0,0,0.1); }
+    .main-content { margin-left: 0; width: 100%; }
+    .menu-toggle { display: block; }
+    .header-greeting h2 { font-size: 1.5rem; }
+}

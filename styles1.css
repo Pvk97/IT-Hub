@@ -1,0 +1,158 @@
+/* ===== FUENTES Y BASE ===== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600&family=Roboto+Mono&display=swap');
+
+/* ===== FONDO ANIMADO Y ESTILOS GLOBALES ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  color: var(--bs-body-color);
+  /* El fondo "techy" animado */
+  background: linear-gradient(225deg, #0f172a, #1e293b, #334155, #4f46e5);
+  background-size: 400% 400%;
+  animation: gradient-animation 20s ease infinite;
+  overflow-x: hidden; /* Previene scroll horizontal */
+  transition: color 0.3s ease;
+}
+
+@keyframes gradient-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+/* ===== HEADER ===== */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* Para mejor adaptabilidad */
+}
+
+.header-content {
+  text-align: center;
+  flex-grow: 1; /* Permite que el título ocupe el espacio central */
+}
+
+.header-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(79, 70, 229, 0.7);
+}
+
+.uy-reference {
+  color: #e2e8f0;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.weather-widget, .news-ticker {
+  background-color: rgba(30, 41, 59, 0.5); /* Fondo oscuro semi-transparente */
+  padding: 1rem;
+  border-radius: 8px;
+  min-width: 250px;
+  border: 1px solid #334155;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-container .btn {
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container img {
+  height: 50px; /* Tamaño igualado al del botón */
+  width: auto;
+  object-fit: contain;
+}
+
+/* ===== TARJETAS Y SECCIONES ===== */
+.card {
+  /* Fondo de cristal esmerilado (frosted glass) */
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* ¡MUY IMPORTANTE para los iconos de fondo! */
+  overflow: hidden; /* Para que el pseudo-elemento no se salga */
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* --- ICONOS DE FONDO PARA CADA SECCIÓN --- */
+.item-container::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.05; /* Muy sutil para que no moleste */
+  transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.card:hover .item-container::after {
+  opacity: 0.1;
+  transform: rotate(-10deg) scale(1.1);
+}
+
+/* Asignamos cada icono a su sección */
+.tickets-container::after    { background-image: url('tickets-icon.png'); }
+.admins-container::after     { background-image: url('admins-icon.png'); }
+.servers-container::after    { background-image: url('servers-icon.png'); }
+.inventario-container::after { background-image: url('inventario-icon.png'); }
+.monitoring-container::after { background-image: url('monitoring-icon.png'); }
+.sheets-container::after     { background-image: url('sheets-icon.png'); }
+
+/* Ajuste para modo claro si lo activaras */
+[data-bs-theme="light"] body {
+  background: linear-gradient(225deg, #e2e8f0, #f8fafc, #cbd5e1, #dbeafe);
+  background-size: 400% 400%;
+}
+[data-bs-theme="light"] .card {
+  background: rgba(255, 255, 255, 0.4);
+}
+[data-bs-theme="light"] .header-content h1,
+[data-bs-theme="light"] .uy-reference {
+  color: #1e293b;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 2rem 0;
+  margin-top: 2rem;
+  color: #e2e8f0;
+  background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('panas.jpg');
+  background-size: cover;
+  background-position: center;
+  border-top: 1px solid #334155;
+}
