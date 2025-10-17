@@ -1053,12 +1053,8 @@
                 document.getElementById('content').innerHTML = Object.values(sections).join('');
             }
         });
-    </script>
-</body>
-</html>
-            });
-        }
-
+        // Cargar tickets al iniciar
+        loadTickets();
         async function loadWeather() {
             try {
                 const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.90&longitude=-56.19&current=temperature_2m,weathercode&daily=temperature_2m_max,temperature_2m_min&timezone=America/Montevideo');
