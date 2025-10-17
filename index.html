@@ -780,6 +780,34 @@
             }
         }
 
+        // ====== TICKETS ======
+        async function loadTickets() {
+            const ticketsCount = document.getElementById('tickets-count');
+            
+            try {
+                const response = await fetch('http://10.8.150.251/osticket/api/tickets.json', {
+                    method: 'GET',
+                    headers: {
+                        'X-API-Key': 'C1A8487130D18339D836D706A62F3ACE',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    // Contar tickets abiertos (status puede variar según configuración)
+                    const openTickets = Array.isArray(data) ? data.length : 0;
+                    animateCount('tickets-count', openTickets);
+                } else {
+                    console.error('Error API osTicket:', response.status);
+                    ticketsCount.textContent = '--';
+                }
+            } catch (error) {
+                console.error('Error cargando tickets:', error);
+                ticketsCount.textContent = '--';
+            }
+        }
+
         // ====== CLIMA ======
         async function loadWeather() {
             const weatherBox = document.getElementById("weather");
@@ -1006,7 +1034,7 @@
             const now = new Date();
             const hour = now.getHours();
             const greeting = hour < 12 ? 'Buenos días' : hour < 18 ? 'Buenas tardes' : 'Buenas noches';
-            document.getElementById('greeting').textContent = greeting + ', mi pana de soporte';
+            document.getElementById('greeting').textContent = greeting + ', Usuario';
             document.getElementById('current-date').textContent = now.toLocaleDateString('es-UY', { 
                 weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
             });
@@ -1025,6 +1053,41 @@
                 document.getElementById('content').innerHTML = Object.values(sections).join('');
             }
         });
+    </script>
+</body>
+</html>
+            });
+        }
+
+        async function loadWeather() {
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.90&longitude=-56.19&current=temperature_2m,weathercode&daily=temperature_2m_max,temperature_2m_min&timezone=America/Montevideo');
+                const data = await res.json();
+                const temp = Math.round(data.current.temperature_2m);
+                const max = Math.round(data.daily.temperature_2m_max[0]);
+                const min = Math.round(data.daily.temperature_2m_min[0]);
+                document.getElementById('weather').innerHTML = `
+                    <div class="weather-current">
+                        <i class="fas fa-sun weather-icon"></i>
+                        <div>
+                            <div class="weather-temp">${temp}°C</div>
+                            <div class="weather-label">Actual</div>
+                        </div>
+                    </div>
+                    <div class="weather-minmax">
+                        <div>Max: <span>${max}°</span></div>
+                        <div>Min: <span>${min}°</span></div>
+                    </div>
+                `;
+            } catch (e) {
+                document.getElementById('weather').innerHTML = '<p>Error cargando clima</p>';
+            }
+        }
+
+        showSection('tickets');
+        updateDateTime();
+        loadWeather();
+        setInterval(updateDateTime, 60000);
     </script>
 </body>
 </html>
