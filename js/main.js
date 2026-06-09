@@ -544,46 +544,46 @@ function updatePerfToggleButton() {
 
 const itSnippets = {
     redes: [
-        { name: 'Ping continuo DNS Google', cmd: 'ping 8.8.8.8 -t', desc: 'Comprueba conectividad externa' },
-        { name: 'Vaciar caché DNS', cmd: 'ipconfig /flushdns', desc: 'Resuelve problemas de nombres' },
-        { name: 'Renovar dirección IP (CMD)', cmd: 'ipconfig /release && ipconfig /renew', desc: 'Fuerza renovación DHCP' },
-        { name: 'Renovar IP (PowerShell)', cmd: 'Restart-NetAdapter -Name "Wi-Fi"', desc: 'Reinicia adaptador de red' },
-        { name: 'Consulta DNS', cmd: 'nslookup google.com', desc: 'Verifica resolución de nombres' },
-        { name: 'Rastrear ruta de red', cmd: 'tracert 8.8.8.8', desc: 'Muestra saltos hacia el destino' },
-        { name: 'Ver tabla ARP', cmd: 'arp -a', desc: 'Muestra IPs y MACs conocidas' },
-        { name: 'Ver rutas activas', cmd: 'route print', desc: 'Tabla de enrutamiento local' }
+        { name: 'Ping / Ping continuo',            cmd: 'ping 8.8.8.8 -t',                                    desc: 'Comprueba conectividad externa (interrumpir con Ctrl+C)' },
+        { name: 'Flush DNS / Vaciar caché DNS',     cmd: 'ipconfig /flushdns',                                 desc: 'Resuelve problemas de resolución de nombres' },
+        { name: 'Renew IP (CMD) / Renovar IP',      cmd: 'ipconfig /release && ipconfig /renew',               desc: 'Fuerza renovación de IP por DHCP' },
+        { name: 'Restart Adapter (PS) / Reiniciar', cmd: 'Restart-NetAdapter -Name "Wi-Fi"',                   desc: 'Reinicia adaptador de red desde PowerShell' },
+        { name: 'DNS Lookup / Consulta DNS',         cmd: 'nslookup google.com',                                desc: 'Verifica resolución de nombres de dominio' },
+        { name: 'Traceroute / Rastrear ruta',        cmd: 'tracert 8.8.8.8',                                   desc: 'Muestra los saltos de red hacia el destino' },
+        { name: 'ARP Table / Tabla ARP',             cmd: 'arp -a',                                             desc: 'Muestra IPs y MACs conocidas en la red local' },
+        { name: 'Route Table / Tabla de rutas',      cmd: 'route print',                                        desc: 'Muestra la tabla de enrutamiento activa' }
     ],
     windows: [
-        { name: 'Abrir Device Manager', cmd: 'devmgmt.msc', desc: 'Administrador de dispositivos' },
-        { name: 'Abrir Registro de Windows', cmd: 'regedit', desc: 'Editor del registro' },
-        { name: 'Abrir Servicios', cmd: 'services.msc', desc: 'Administrador de servicios de Windows' },
-        { name: 'Abrir Política de Grupo', cmd: 'gpedit.msc', desc: 'Editor de directiva de grupo local' },
-        { name: 'Abrir Usuarios locales', cmd: 'lusrmgr.msc', desc: 'Gestión de usuarios y grupos' },
-        { name: 'Abrir Administrador de discos', cmd: 'diskmgmt.msc', desc: 'Gestión de particiones' },
-        { name: 'Chequeo de archivos del sistema', cmd: 'sfc /scannow', desc: 'Repara archivos corruptos (Admin)' },
-        { name: 'Reparar imagen de Windows', cmd: 'DISM /Online /Cleanup-Image /RestoreHealth', desc: 'Repara imagen del sistema (Admin)' },
-        { name: 'Verificar y reparar disco', cmd: 'chkdsk C: /f /r', desc: 'Análisis del disco al reiniciar (Admin)' },
-        { name: 'Ver info del sistema', cmd: 'msinfo32', desc: 'Información completa del equipo' },
-        { name: 'Reiniciar explorador', cmd: 'taskkill /f /im explorer.exe && start explorer.exe', desc: 'Reinicia la barra de tareas' },
-        { name: 'Forzar política de grupo', cmd: 'gpupdate /force', desc: 'Aplica cambios de GPO inmediatamente' },
-        { name: 'Ver licencia de Windows', cmd: 'slmgr /dli', desc: 'Estado de activación de Windows' },
-        { name: 'Flush de impresoras (spool)', cmd: 'net stop spooler && net start spooler', desc: 'Reinicia el servicio de impresión' }
+        { name: 'Device Manager / Admin. dispositivos', cmd: 'devmgmt.msc',                                              desc: 'Gestiona hardware, drivers y dispositivos' },
+        { name: 'Registry Editor / Registro Windows',   cmd: 'regedit',                                                  desc: 'Editor del registro del sistema (precaución)' },
+        { name: 'Services / Administrador servicios',   cmd: 'services.msc',                                             desc: 'Inicia, detiene y configura servicios Windows' },
+        { name: 'Group Policy / Política de grupo',     cmd: 'gpedit.msc',                                               desc: 'Editor de directiva de grupo local' },
+        { name: 'Local Users / Usuarios locales',       cmd: 'lusrmgr.msc',                                              desc: 'Gestiona usuarios y grupos del equipo' },
+        { name: 'Disk Manager / Admin. de discos',      cmd: 'diskmgmt.msc',                                             desc: 'Gestiona particiones y unidades de disco' },
+        { name: 'SFC / Verificar archivos sistema',     cmd: 'sfc /scannow',                                             desc: 'Escanea y repara archivos corruptos (requiere Admin)' },
+        { name: 'DISM Repair / Reparar imagen Win',     cmd: 'DISM /Online /Cleanup-Image /RestoreHealth',               desc: 'Repara la imagen de Windows desde internet (Admin)' },
+        { name: 'Check Disk / Verificar disco',         cmd: 'chkdsk C: /f /r',                                          desc: 'Verifica y repara errores del disco al reiniciar (Admin)' },
+        { name: 'System Info / Info del sistema',       cmd: 'msinfo32',                                                 desc: 'Panel completo de información del equipo' },
+        { name: 'Restart Explorer / Reiniciar barra',  cmd: 'taskkill /f /im explorer.exe && start explorer.exe',       desc: 'Reinicia el Explorador de Windows y la barra de tareas' },
+        { name: 'Force GPO / Forzar directiva grupo',   cmd: 'gpupdate /force',                                          desc: 'Aplica cambios de GPO inmediatamente' },
+        { name: 'Win License / Licencia Windows',       cmd: 'slmgr /dli',                                               desc: 'Muestra el estado de activación de Windows' },
+        { name: 'Restart Spooler / Reiniciar impresión',cmd: 'net stop spooler && net start spooler',                    desc: 'Reinicia el servicio de cola de impresión' }
     ],
     servidores: [
-        { name: 'SSH a Ticket Server (osticket)', cmd: 'ssh root@10.8.150.251', desc: 'Consola del servidor de tickets' },
-        { name: 'SSH a ProxMox 10.240', cmd: 'ssh root@10.8.10.240', desc: 'Consola del host ProxMox' },
-        { name: 'Estado servicio Zabbix', cmd: 'systemctl status zabbix-server', desc: 'Verifica daemon de monitoreo' },
-        { name: 'Reiniciar Nginx', cmd: 'systemctl restart nginx', desc: 'Aplica cambios de config web' },
-        { name: 'Actualizar repositorio git', cmd: 'git pull origin main', desc: 'Trae últimos cambios de código' },
-        { name: 'Ver últimas 50 líneas log Nginx', cmd: 'tail -n 50 /var/log/nginx/error.log', desc: 'Revisa errores del web server' },
-        { name: 'Espacio en disco', cmd: 'df -h', desc: 'Uso de almacenamiento del servidor' }
+        { name: 'SSH Tickets / Servidor osticket',      cmd: 'ssh root@10.8.150.251',                          desc: 'Abre consola SSH del servidor de tickets' },
+        { name: 'SSH ProxMox / Acceso ProxMox',         cmd: 'ssh root@10.8.10.240',                           desc: 'Abre consola SSH del host ProxMox' },
+        { name: 'Zabbix Status / Estado Zabbix',        cmd: 'systemctl status zabbix-server',                 desc: 'Verifica si el daemon de monitoreo está activo' },
+        { name: 'Restart Nginx / Reiniciar Nginx',      cmd: 'systemctl restart nginx',                        desc: 'Aplica cambios de configuración del web server' },
+        { name: 'Git Pull / Actualizar repo',           cmd: 'git pull origin main',                           desc: 'Descarga los últimos cambios del repositorio' },
+        { name: 'Nginx Error Log / Log de errores',     cmd: 'tail -n 50 /var/log/nginx/error.log',            desc: 'Muestra las últimas 50 líneas del log de errores Nginx' },
+        { name: 'Disk Space / Espacio en disco',        cmd: 'df -h',                                          desc: 'Muestra el uso de almacenamiento del servidor' }
     ],
     soporte: [
-        { name: 'Probar puerto TCP (PS)', cmd: 'Test-NetConnection -ComputerName 10.8.10.240 -Port 8006', desc: 'Verifica conectividad a Puerto ProxMox' },
-        { name: 'Procesos de CPU y memoria', cmd: 'top -b -n 1 | head -n 20', desc: 'Diagnostica recursos en Linux' },
-        { name: 'Ver eventos de sistema (PS)', cmd: 'Get-EventLog -LogName System -Newest 20', desc: 'Últimos 20 eventos del sistema' },
-        { name: 'Lista procesos Windows', cmd: 'tasklist /v', desc: 'Todos los procesos activos con detalles' },
-        { name: 'Matar proceso por nombre', cmd: 'taskkill /IM notepad.exe /F', desc: 'Fuerza cierre de un proceso' }
+        { name: 'Test TCP Port (PS) / Probar puerto',   cmd: 'Test-NetConnection -ComputerName 10.8.10.240 -Port 8006', desc: 'Verifica conectividad TCP al puerto ProxMox 8006' },
+        { name: 'Top Processes / Procesos CPU',         cmd: 'top -b -n 1 | head -n 20',                      desc: 'Muestra procesos por uso de CPU en Linux' },
+        { name: 'System Events (PS) / Eventos sistema', cmd: 'Get-EventLog -LogName System -Newest 20',        desc: 'Últimos 20 eventos del sistema en PowerShell' },
+        { name: 'Tasklist / Lista de procesos',         cmd: 'tasklist /v',                                    desc: 'Lista todos los procesos activos con detalles' },
+        { name: 'Kill Process / Matar proceso',         cmd: 'taskkill /IM notepad.exe /F',                    desc: 'Fuerza el cierre de un proceso por nombre' }
     ]
 };
 
@@ -596,19 +596,23 @@ function initITSnippets() {
         itSnippets[category].forEach(snippet => {
             const item = document.createElement('div');
             item.className = 'snippet-item';
-            // Escape single quotes for inline onclick safely
-            const safeCmd = snippet.cmd.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
             item.innerHTML = `
                 <div class="snippet-info">
-                    <span class="snippet-name" title="${snippet.name}">${snippet.name}</span>
+                    <span class="snippet-name">${snippet.name}</span>
                     <span class="snippet-desc">${snippet.desc}</span>
+                    <code class="snippet-cmd-preview">${snippet.cmd}</code>
                 </div>
                 <div class="snippet-action">
-                    <button class="snippet-copy-btn" onclick="copySnippet('${safeCmd}')" title="Copiar: ${snippet.cmd}">
+                    <button class="snippet-copy-btn" title="Copiar al portapapeles">
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
             `;
+            // Use event listener to avoid all string-escaping issues with special chars
+            item.querySelector('.snippet-copy-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                copySnippet(snippet.cmd);
+            });
             container.appendChild(item);
         });
     }
@@ -675,11 +679,31 @@ function switchSnippetCategory(category) {
 }
 
 function copySnippet(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        showCopyToast();
-    }).catch(err => {
-        console.error('Error al copiar:', err);
-    });
+    // navigator.clipboard only works on HTTPS. Use execCommand fallback for HTTP.
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            showCopyToast();
+        }).catch(() => fallbackCopyText(text));
+    } else {
+        fallbackCopyText(text);
+    }
+}
+
+function fallbackCopyText(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+        const success = document.execCommand('copy');
+        if (success) showCopyToast();
+        else console.error('execCommand copy falló');
+    } catch (err) {
+        console.error('Error al copiar (fallback):', err);
+    }
+    document.body.removeChild(textarea);
 }
 
 function showCopyToast() {

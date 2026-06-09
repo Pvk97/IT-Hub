@@ -421,6 +421,8 @@ body.perf-mode-active #tech-bg {
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     animation: fadeIn 0.8s ease-out;
+    display: flex;
+    flex-direction: column;
 }
 
 .widget:hover {
@@ -445,6 +447,15 @@ body.perf-mode-active #tech-bg {
     font-size: 14px;
     color: var(--text-secondary);
     margin-bottom: 12px;
+    flex-shrink: 0;
+}
+
+/* Make the news widget's content div fill remaining space */
+#news {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .weather-content {
@@ -487,8 +498,8 @@ body.perf-mode-active #tech-bg {
     list-style: none;
     padding: 0;
     margin: 0;
-    max-height: 120px;
     overflow-y: auto;
+    flex: 1;
 }
 
 .news-list::-webkit-scrollbar {
