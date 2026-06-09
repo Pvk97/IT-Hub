@@ -22,19 +22,32 @@
                 </div>
             </div>
 
-            <!-- Task Manager Widget (Replaces Nav) -->
-            <div class="task-widget">
-                <div class="task-header">
-                    <span>QUICK NOTES & TASKS</span>
-                    <i class="fas fa-tasks"></i>
+            <!-- Sidebar Widget (Tasks & Sticky Notes) -->
+            <div class="sidebar-widget">
+                <div class="widget-switcher">
+                    <button id="switch-tasks-btn" class="switch-btn active" onclick="switchWidget('tasks')">
+                        <i class="fas fa-check-square"></i> Tareas
+                    </button>
+                    <button id="switch-notes-btn" class="switch-btn" onclick="switchWidget('notes')">
+                        <i class="fas fa-sticky-note"></i> Notas
+                    </button>
                 </div>
-                <div class="task-input-group">
-                    <input type="text" id="task-input" class="task-input" placeholder="Nueva tarea...">
-                    <button id="task-add-btn" class="task-add-btn"><i class="fas fa-plus"></i></button>
+                
+                <!-- Tasks Section -->
+                <div id="tasks-section" class="widget-section active">
+                    <div class="task-input-group">
+                        <input type="text" id="task-input" class="task-input" placeholder="Nueva tarea...">
+                        <button id="task-add-btn" class="task-add-btn"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <ul id="task-list" class="task-list">
+                        <!-- Tasks will be added here -->
+                    </ul>
                 </div>
-                <ul id="task-list" class="task-list">
-                    <!-- Tasks will be added here -->
-                </ul>
+                
+                <!-- Notes Section -->
+                <div id="notes-section" class="widget-section">
+                    <textarea id="notes-input" class="notes-textarea" placeholder="Escribe notas rápidas de IT aquí (se guardan automáticamente)..."></textarea>
+                </div>
             </div>
 
             <div class="sidebar-footer">
@@ -58,6 +71,12 @@
 
                     <button class="theme-toggle" onclick="toggleTheme()">
                         <i class="fas fa-sun"></i>
+                    </button>
+                    <button class="perf-toggle" onclick="togglePerformanceMode()" title="Modo de rendimiento (Ahorro de CPU)">
+                        <i class="fas fa-bolt"></i>
+                    </button>
+                    <button class="tools-toggle-btn" onclick="toggleRightSidebar()" title="Mostrar/Ocultar Herramientas">
+                        <i class="fas fa-toolbox"></i>
                     </button>
                     <a href="https://meet.google.com/xsq-jwpw-mpp?authuser=0" target="_blank" class="meet-btn">
                         <i class="fas fa-phone"></i>
@@ -141,6 +160,10 @@
                 </div>
 
                 <div class="cards-grid" id="content"></div>
+                <div id="search-no-results" class="search-no-results" style="display: none;">
+                    <i class="fas fa-search-minus"></i>
+                    <p>No se encontraron resultados para tu búsqueda.</p>
+                </div>
 
                 <footer class="footer">
                     <div class="footer-text">
@@ -149,6 +172,79 @@
                 </footer>
             </main>
         </div>
+        
+        <!-- Right Sidebar (IT Tools & Snippets) -->
+        <aside class="sidebar-right" id="sidebar-right">
+            <div class="sidebar-right-header">
+                <h3><i class="fas fa-toolbox"></i> Herramientas de IT</h3>
+            </div>
+            
+            <!-- Client IP detector -->
+            <div class="client-ip-container">
+                <span class="ip-label"><i class="fas fa-network-wired"></i> Tu IP Actual:</span>
+                <span id="client-ip-val" class="ip-value loading">Detectando...</span>
+                <button class="ip-refresh-btn" onclick="detectClientIP()" title="Recargar IP"><i class="fas fa-sync-alt"></i></button>
+            </div>
+
+            <!-- Command Snippets Panel -->
+            <div class="right-panel-widget snippets-widget">
+                <div class="widget-header">
+                    <h4><i class="fas fa-terminal"></i> Comandos Rápidos</h4>
+                </div>
+                <div class="snippet-tabs">
+                    <button class="tab-btn active" onclick="switchSnippetCategory('redes')">Redes</button>
+                    <button class="tab-btn" onclick="switchSnippetCategory('windows')">CMD/Win</button>
+                    <button class="tab-btn" onclick="switchSnippetCategory('servidores')">Linux</button>
+                    <button class="tab-btn" onclick="switchSnippetCategory('soporte')">Diag</button>
+                </div>
+                <div class="panel-content">
+                    <div id="snippets-redes" class="snippet-category-list active"></div>
+                    <div id="snippets-windows" class="snippet-category-list"></div>
+                    <div id="snippets-servidores" class="snippet-category-list"></div>
+                    <div id="snippets-soporte" class="snippet-category-list"></div>
+                </div>
+            </div>
+
+            <!-- VLAN Reference Table -->
+            <div class="right-panel-widget vlan-widget">
+                <div class="widget-header">
+                    <h4><i class="fas fa-network-wired"></i> VLANs & Subredes</h4>
+                </div>
+                <div class="vlan-table-container">
+                    <table class="vlan-table">
+                        <thead>
+                            <tr>
+                                <th>Rango</th>
+                                <th>Uso</th>
+                                <th>GW</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="mono">10.8.10.0/24</td>
+                                <td>Servidores</td>
+                                <td class="mono">10.8.10.1</td>
+                            </tr>
+                            <tr>
+                                <td class="mono">10.8.1.0/24</td>
+                                <td>Cámaras</td>
+                                <td class="mono">10.8.1.1</td>
+                            </tr>
+                            <tr>
+                                <td class="mono">10.8.150.0/24</td>
+                                <td>Tickets</td>
+                                <td class="mono">10.8.150.1</td>
+                            </tr>
+                            <tr>
+                                <td class="mono">10.8.100.0/22</td>
+                                <td>DHCP UY</td>
+                                <td class="mono">10.8.100.1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </aside>
     </div>
 
     <script src="js/main.js"></script>

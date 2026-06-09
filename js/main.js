@@ -51,8 +51,8 @@ const sections = {
                 <a href="https://docs.google.com/spreadsheets/d/1gvYCX_-y-V7Y8U6ZJGIoRfdX_RIeQlMX/edit" target="_blank" class="card-link">
                     <i class="fas fa-file-excel"></i> Assets
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/134fY3R4ENP2g2L1TnxAiNPl5hPKp02zg8YpVgIe_n_A/edit" target="_blank" class="card-link">
-                    <i class="fas fa-laptop-code"></i> Laptop Agreement
+                <a href="https://docs.google.com/spreadsheets/d/1ConfNwkEdHz1SSGe7WeP879u-3rLWTg38QKRWp7mM6I/edit?gid=0#gid=0" target="_blank" class="card-link">
+                    <i class="fas fa-screwdriver-wrench"></i> Equipment
                 </a>
                 <a href="https://app.pandadoc.com/a/#/templates/EbbCDgUJ6sm5vHdkbLiEKZ" target="_blank" class="card-link">
                     <i class="fas fa-file-signature"></i> Pandadoc
@@ -106,7 +106,7 @@ const sections = {
                 <a href="https://docs.google.com/spreadsheets/d/1BN-t93ztD2GX3KP4XvBnDKY-d59-_4ZFrcs9nfV7c6Q/edit" target="_blank" class="card-link">
                     <i class="fas fa-map-location-dot"></i> Map
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/11fYiuonYnWC8dSDAKklyuVdVSPkK1Uhh/edit" target="_blank" class="card-link">
+                <a href="https://docs.google.com/spreadsheets/d/1VE_WAA-t6r5EPyOfLCX9aiwwho5hO_xt/edit?gid=495663830#gid=495663830" target="_blank" class="card-link">
                     <i class="fas fa-sitemap"></i> Org Chart
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1QXGr98PUMRp06KVMqGYIerY45PzWzfdY8NrKE5LKckw/edit" target="_blank" class="card-link">
@@ -118,6 +118,87 @@ const sections = {
                 <a href="https://docs.google.com/spreadsheets/d/19hTfgR7V3ZCwIvli5QpE448nkYyeGIZemXZBhD_Rego/edit" target="_blank" class="card-link">
                     <i class="fas fa-users"></i> 8x8 Monthly Users
                 </a>
+            </div>
+        </div>
+    `,
+    itTools: `
+        <div class="card it-tools-card" style="grid-column: 1 / -1;" data-keywords="tools snippets commands ip subredes vlans ping dns gateway terminal bash ps">
+            <h2 class="card-title">Herramientas de IT & Comandos Rápidos</h2>
+            
+            <div class="it-tools-grid">
+                <!-- Left panel: Command Snippets with Category Tabs -->
+                <div class="tools-panel snippets-panel">
+                    <div class="panel-header">
+                        <h3>Comandos Rápidos (Soporte IT)</h3>
+                        <div class="snippet-tabs">
+                            <button class="tab-btn active" onclick="switchSnippetCategory('redes')">Redes</button>
+                            <button class="tab-btn" onclick="switchSnippetCategory('servidores')">Servidores/SSH</button>
+                            <button class="tab-btn" onclick="switchSnippetCategory('soporte')">Diagnóstico</button>
+                        </div>
+                    </div>
+                    
+                    <div class="panel-content">
+                        <div id="snippets-redes" class="snippet-category-list active">
+                            <!-- Network snippets will go here -->
+                        </div>
+                        <div id="snippets-servidores" class="snippet-category-list">
+                            <!-- Server snippets will go here -->
+                        </div>
+                        <div id="snippets-soporte" class="snippet-category-list">
+                            <!-- Support snippets will go here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right panel: Network info & Subnet reference -->
+                <div class="tools-panel network-panel">
+                    <div class="panel-header">
+                        <h3>Información de Red & Subredes</h3>
+                    </div>
+                    <div class="panel-content">
+                        <!-- Client IP detector -->
+                        <div class="client-ip-container">
+                            <span class="ip-label"><i class="fas fa-network-wired"></i> Tu IP Actual:</span>
+                            <span id="client-ip-val" class="ip-value loading">Detectando...</span>
+                            <button class="ip-refresh-btn" onclick="detectClientIP()" title="Recargar IP"><i class="fas fa-sync-alt"></i></button>
+                        </div>
+                        
+                        <!-- VLAN / Subnet Reference table -->
+                        <div class="vlan-table-container">
+                            <table class="vlan-table">
+                                <thead>
+                                    <tr>
+                                        <th>Subred / Rango</th>
+                                        <th>Descripción</th>
+                                        <th>Puerta de Enlace</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="mono">10.8.10.0/24</td>
+                                        <td>Servidores & Proxmox</td>
+                                        <td class="mono">10.8.10.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mono">10.8.1.0/24</td>
+                                        <td>Cámaras & Seguridad</td>
+                                        <td class="mono">10.8.1.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mono">10.8.150.0/24</td>
+                                        <td>Tickets (osticket)</td>
+                                        <td class="mono">10.8.150.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mono">10.8.100.0/22</td>
+                                        <td>DHCP Clientes Uruguay</td>
+                                        <td class="mono">10.8.100.1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     `
@@ -156,15 +237,30 @@ function animateCount(elementId, target) {
 // --- 1. Search Functionality ---
 function initSearch() {
     const searchInput = document.getElementById('search-input');
+    const noResultsEl = document.getElementById('search-no-results');
     if (!searchInput) return;
 
+    // Shortcut key '/' to focus search
+    window.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== searchInput && 
+            document.activeElement.tagName !== 'INPUT' && 
+            document.activeElement.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+            searchInput.focus();
+            searchInput.select();
+        }
+    });
+
     searchInput.addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase();
+        const term = e.target.value.toLowerCase().trim();
         const cards = document.querySelectorAll('.card');
+        let visibleCount = 0;
 
         cards.forEach(card => {
-            // Search in title, keywords attribute, and link text
-            const title = card.querySelector('.card-title').textContent.toLowerCase();
+            const titleEl = card.querySelector('.card-title');
+            if (!titleEl) return;
+            
+            const title = titleEl.textContent.toLowerCase();
             const keywords = card.getAttribute('data-keywords') || '';
             const links = Array.from(card.querySelectorAll('.card-link')).map(l => l.textContent.toLowerCase()).join(' ');
 
@@ -172,11 +268,15 @@ function initSearch() {
 
             if (match) {
                 card.style.display = 'block';
-                // Highlight logic could go here
+                visibleCount++;
             } else {
                 card.style.display = 'none';
             }
         });
+
+        if (noResultsEl) {
+            noResultsEl.style.display = visibleCount === 0 ? 'flex' : 'none';
+        }
     });
 }
 
@@ -299,65 +399,361 @@ function updateWorldClocks() {
     });
 }
 
-// --- 5. Tech Background (Matrix Effect) ---
-function initMatrixBackground() {
+// --- 5. Tech Background (Matrix Effect - Optimized) ---
+let matrixIntervalId = null;
+
+function startMatrix() {
+    if (matrixIntervalId || document.body.classList.contains('perf-mode-active')) return;
+
     const canvas = document.getElementById('tech-bg');
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-
-    // Set canvas size
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Characters to drop
     const chars = '0101010101ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const charArray = chars.split('');
+    const fontSize = 10; // Stretched by CSS
 
-    const fontSize = 14;
     const columns = canvas.width / fontSize;
-
-    // Array for drops - one per column
     const drops = [];
     for (let i = 0; i < columns; i++) {
-        drops[i] = 1;
+        drops[i] = Math.floor(Math.random() * -100); // Vertically scattered
     }
 
     function draw() {
-        // Black BG for the canvas
-        // Translucent BG to show trail
-        ctx.fillStyle = document.body.classList.contains('light-mode')
-            ? 'rgba(240, 242, 245, 0.1)'
-            : 'rgba(15, 23, 42, 0.1)';
+        if (document.hidden || document.body.classList.contains('perf-mode-active')) {
+            return;
+        }
 
+        ctx.fillStyle = document.body.classList.contains('light-mode')
+            ? 'rgba(240, 242, 245, 0.15)'
+            : 'rgba(15, 23, 42, 0.15)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.fillStyle = document.body.classList.contains('light-mode')
-            ? '#3b82f6' // Blue for light mode
-            : '#0f0';   // Green for dark mode (classic matrix)
-
+            ? '#3b82f6'
+            : '#0f0';
         ctx.font = fontSize + 'px monospace';
 
         for (let i = 0; i < drops.length; i++) {
             const text = charArray[Math.floor(Math.random() * charArray.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-            // Sending the drop back to the top randomly after it has crossed the screen
-            // adding a randomness to the reset to make the drops scattered on the Y axis
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
+            
+            if (drops[i] >= 0) {
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
             }
 
-            // Incrementing Y coordinate
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.985) {
+                drops[i] = 0;
+            }
             drops[i]++;
         }
     }
 
-    setInterval(draw, 50);
+    // 85ms interval (~12 FPS) dramatically reduces CPU calculations compared to 50ms (20 FPS)
+    matrixIntervalId = setInterval(draw, 85);
+}
+
+function stopMatrix() {
+    if (matrixIntervalId) {
+        clearInterval(matrixIntervalId);
+        matrixIntervalId = null;
+    }
+    const canvas = document.getElementById('tech-bg');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+}
+
+function initMatrixBackground() {
+    const canvas = document.getElementById('tech-bg');
+    if (!canvas) return;
+
+    function resizeCanvas() {
+        // Render at half-resolution. Stretched by CSS, saving 75% of fill/text pixel calculations.
+        canvas.width = Math.floor(window.innerWidth / 2);
+        canvas.height = Math.floor(window.innerHeight / 2);
+        
+        if (matrixIntervalId) {
+            stopMatrix();
+            startMatrix();
+        }
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Pause drawing if tab is in the background
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopMatrix();
+        } else {
+            startMatrix();
+        }
+    });
+
+    startMatrix();
+}
+
+// --- 5.1. Performance & Energy Saver Mode ---
+function initPerformanceMode() {
+    const savedMode = localStorage.getItem('it-hub-perf-mode');
+    // Default is true (energy saving mode active, canvas disabled)
+    const perfModeActive = savedMode === null ? true : (savedMode === 'true');
+
+    if (perfModeActive) {
+        document.body.classList.add('perf-mode-active');
+        stopMatrix();
+    } else {
+        document.body.classList.remove('perf-mode-active');
+        startMatrix();
+    }
+    updatePerfToggleButton();
+}
+
+function togglePerformanceMode() {
+    const isCurrentlyActive = document.body.classList.contains('perf-mode-active');
+    if (isCurrentlyActive) {
+        document.body.classList.remove('perf-mode-active');
+        localStorage.setItem('it-hub-perf-mode', 'false');
+        startMatrix();
+    } else {
+        document.body.classList.add('perf-mode-active');
+        localStorage.setItem('it-hub-perf-mode', 'true');
+        stopMatrix();
+    }
+    updatePerfToggleButton();
+}
+
+function updatePerfToggleButton() {
+    const btn = document.querySelector('.perf-toggle i');
+    const btnParent = document.querySelector('.perf-toggle');
+    if (!btn || !btnParent) return;
+
+    const isAhorro = document.body.classList.contains('perf-mode-active');
+    if (isAhorro) {
+        btn.className = 'fas fa-leaf';
+        btnParent.style.color = '#22c55e'; // Green leaf
+        btnParent.title = 'Ahorro de energía activo (Fondo pausado). Haz clic para encender fondo Matrix.';
+    } else {
+        btn.className = 'fas fa-bolt';
+        btnParent.style.color = '#eab308'; // Yellow bolt
+        btnParent.title = 'Fondo Matrix activo. Haz clic para activar ahorro de energía (Reducir CPU).';
+    }
+}
+
+// ====== IT-HUB NEW FEATURES ======
+
+const itSnippets = {
+    redes: [
+        { name: 'Ping continuo DNS Google', cmd: 'ping 8.8.8.8 -t', desc: 'Comprueba conectividad externa' },
+        { name: 'Vaciar caché DNS', cmd: 'ipconfig /flushdns', desc: 'Resuelve problemas de nombres' },
+        { name: 'Renovar dirección IP (CMD)', cmd: 'ipconfig /release && ipconfig /renew', desc: 'Fuerza renovación DHCP' },
+        { name: 'Renovar IP (PowerShell)', cmd: 'Restart-NetAdapter -Name "Wi-Fi"', desc: 'Reinicia adaptador de red' },
+        { name: 'Consulta DNS', cmd: 'nslookup google.com', desc: 'Verifica resolución de nombres' },
+        { name: 'Rastrear ruta de red', cmd: 'tracert 8.8.8.8', desc: 'Muestra saltos hacia el destino' },
+        { name: 'Ver tabla ARP', cmd: 'arp -a', desc: 'Muestra IPs y MACs conocidas' },
+        { name: 'Ver rutas activas', cmd: 'route print', desc: 'Tabla de enrutamiento local' }
+    ],
+    windows: [
+        { name: 'Abrir Device Manager', cmd: 'devmgmt.msc', desc: 'Administrador de dispositivos' },
+        { name: 'Abrir Registro de Windows', cmd: 'regedit', desc: 'Editor del registro' },
+        { name: 'Abrir Servicios', cmd: 'services.msc', desc: 'Administrador de servicios de Windows' },
+        { name: 'Abrir Política de Grupo', cmd: 'gpedit.msc', desc: 'Editor de directiva de grupo local' },
+        { name: 'Abrir Usuarios locales', cmd: 'lusrmgr.msc', desc: 'Gestión de usuarios y grupos' },
+        { name: 'Abrir Administrador de discos', cmd: 'diskmgmt.msc', desc: 'Gestión de particiones' },
+        { name: 'Chequeo de archivos del sistema', cmd: 'sfc /scannow', desc: 'Repara archivos corruptos (Admin)' },
+        { name: 'Reparar imagen de Windows', cmd: 'DISM /Online /Cleanup-Image /RestoreHealth', desc: 'Repara imagen del sistema (Admin)' },
+        { name: 'Verificar y reparar disco', cmd: 'chkdsk C: /f /r', desc: 'Análisis del disco al reiniciar (Admin)' },
+        { name: 'Ver info del sistema', cmd: 'msinfo32', desc: 'Información completa del equipo' },
+        { name: 'Reiniciar explorador', cmd: 'taskkill /f /im explorer.exe && start explorer.exe', desc: 'Reinicia la barra de tareas' },
+        { name: 'Forzar política de grupo', cmd: 'gpupdate /force', desc: 'Aplica cambios de GPO inmediatamente' },
+        { name: 'Ver licencia de Windows', cmd: 'slmgr /dli', desc: 'Estado de activación de Windows' },
+        { name: 'Flush de impresoras (spool)', cmd: 'net stop spooler && net start spooler', desc: 'Reinicia el servicio de impresión' }
+    ],
+    servidores: [
+        { name: 'SSH a Ticket Server (osticket)', cmd: 'ssh root@10.8.150.251', desc: 'Consola del servidor de tickets' },
+        { name: 'SSH a ProxMox 10.240', cmd: 'ssh root@10.8.10.240', desc: 'Consola del host ProxMox' },
+        { name: 'Estado servicio Zabbix', cmd: 'systemctl status zabbix-server', desc: 'Verifica daemon de monitoreo' },
+        { name: 'Reiniciar Nginx', cmd: 'systemctl restart nginx', desc: 'Aplica cambios de config web' },
+        { name: 'Actualizar repositorio git', cmd: 'git pull origin main', desc: 'Trae últimos cambios de código' },
+        { name: 'Ver últimas 50 líneas log Nginx', cmd: 'tail -n 50 /var/log/nginx/error.log', desc: 'Revisa errores del web server' },
+        { name: 'Espacio en disco', cmd: 'df -h', desc: 'Uso de almacenamiento del servidor' }
+    ],
+    soporte: [
+        { name: 'Probar puerto TCP (PS)', cmd: 'Test-NetConnection -ComputerName 10.8.10.240 -Port 8006', desc: 'Verifica conectividad a Puerto ProxMox' },
+        { name: 'Procesos de CPU y memoria', cmd: 'top -b -n 1 | head -n 20', desc: 'Diagnostica recursos en Linux' },
+        { name: 'Ver eventos de sistema (PS)', cmd: 'Get-EventLog -LogName System -Newest 20', desc: 'Últimos 20 eventos del sistema' },
+        { name: 'Lista procesos Windows', cmd: 'tasklist /v', desc: 'Todos los procesos activos con detalles' },
+        { name: 'Matar proceso por nombre', cmd: 'taskkill /IM notepad.exe /F', desc: 'Fuerza cierre de un proceso' }
+    ]
+};
+
+function initITSnippets() {
+    for (const category in itSnippets) {
+        const container = document.getElementById(`snippets-${category}`);
+        if (!container) continue;
+
+        container.innerHTML = '';
+        itSnippets[category].forEach(snippet => {
+            const item = document.createElement('div');
+            item.className = 'snippet-item';
+            // Escape single quotes for inline onclick safely
+            const safeCmd = snippet.cmd.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            item.innerHTML = `
+                <div class="snippet-info">
+                    <span class="snippet-name" title="${snippet.name}">${snippet.name}</span>
+                    <span class="snippet-desc">${snippet.desc}</span>
+                </div>
+                <div class="snippet-action">
+                    <button class="snippet-copy-btn" onclick="copySnippet('${safeCmd}')" title="Copiar: ${snippet.cmd}">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            `;
+            container.appendChild(item);
+        });
+    }
+}
+
+function toggleRightSidebar() {
+    const sidebar = document.getElementById('sidebar-right');
+    const mainContent = document.querySelector('.main-content');
+    const btn = document.querySelector('.tools-toggle-btn');
+    if (!sidebar) return;
+
+    const isHidden = sidebar.classList.contains('hidden');
+    if (isHidden) {
+        sidebar.classList.remove('hidden');
+        if (mainContent && window.innerWidth > 1100) {
+            mainContent.classList.remove('right-sidebar-closed');
+        }
+        if (btn) btn.classList.add('active');
+        localStorage.setItem('it-hub-right-sidebar', 'open');
+    } else {
+        sidebar.classList.add('hidden');
+        if (mainContent) mainContent.classList.add('right-sidebar-closed');
+        if (btn) btn.classList.remove('active');
+        localStorage.setItem('it-hub-right-sidebar', 'closed');
+    }
+}
+
+function initRightSidebar() {
+    const saved = localStorage.getItem('it-hub-right-sidebar');
+    const sidebar = document.getElementById('sidebar-right');
+    const mainContent = document.querySelector('.main-content');
+    const btn = document.querySelector('.tools-toggle-btn');
+
+    // Default: open on wide screens, hidden on narrow
+    const isWide = window.innerWidth > 1100;
+    const shouldOpen = saved === null ? isWide : (saved === 'open');
+
+    if (shouldOpen && isWide) {
+        sidebar?.classList.remove('hidden');
+        mainContent?.classList.remove('right-sidebar-closed');
+        btn?.classList.add('active');
+    } else {
+        sidebar?.classList.add('hidden');
+        mainContent?.classList.add('right-sidebar-closed');
+        btn?.classList.remove('active');
+    }
+}
+
+function switchSnippetCategory(category) {
+    const lists = document.querySelectorAll('.snippet-category-list');
+    lists.forEach(list => list.classList.remove('active'));
+    
+    const tabs = document.querySelectorAll('.snippet-tabs .tab-btn');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    const activeList = document.getElementById(`snippets-${category}`);
+    if (activeList) activeList.classList.add('active');
+    
+    const activeTab = Array.from(tabs).find(tab => {
+        const onclickAttr = tab.getAttribute('onclick');
+        return onclickAttr && onclickAttr.includes(category);
+    });
+    if (activeTab) activeTab.classList.add('active');
+}
+
+function copySnippet(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        showCopyToast();
+    }).catch(err => {
+        console.error('Error al copiar:', err);
+    });
+}
+
+function showCopyToast() {
+    let toast = document.getElementById('copy-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'copy-toast';
+        toast.className = 'copy-toast';
+        toast.innerHTML = '<i class="fas fa-check-circle"></i> ¡Comando copiado al portapapeles!';
+        document.body.appendChild(toast);
+    }
+    
+    toast.classList.remove('show');
+    void toast.offsetWidth; // Trigger reflow
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2000);
+}
+
+async function detectClientIP() {
+    const el = document.getElementById('client-ip-val');
+    if (!el) return;
+    
+    el.textContent = 'Detectando...';
+    el.className = 'ip-value loading';
+    
+    try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        if (res.ok) {
+            const data = await res.json();
+            el.textContent = data.ip;
+            el.className = 'ip-value';
+        } else {
+            throw new Error('Fallback');
+        }
+    } catch (err) {
+        console.log('Error detecting IP:', err);
+        el.textContent = 'No disponible';
+        el.className = 'ip-value error';
+    }
+}
+
+function switchWidget(mode) {
+    const btnTasks = document.getElementById('switch-tasks-btn');
+    const btnNotes = document.getElementById('switch-notes-btn');
+    const secTasks = document.getElementById('tasks-section');
+    const secNotes = document.getElementById('notes-section');
+    
+    if (!btnTasks || !btnNotes || !secTasks || !secNotes) return;
+    
+    if (mode === 'tasks') {
+        btnTasks.classList.add('active');
+        btnNotes.classList.remove('active');
+        secTasks.classList.add('active');
+        secNotes.classList.remove('active');
+    } else {
+        btnTasks.classList.remove('active');
+        btnNotes.classList.add('active');
+        secTasks.classList.remove('active');
+        secNotes.classList.add('active');
+    }
+}
+
+function initSidebarNotes() {
+    const notesInput = document.getElementById('notes-input');
+    if (!notesInput) return;
+    
+    notesInput.value = localStorage.getItem('it-hub-notes') || '';
+    
+    notesInput.addEventListener('input', (e) => {
+        localStorage.setItem('it-hub-notes', e.target.value);
+    });
 }
 
 // --- 4. Service Status Check ---
@@ -512,11 +908,14 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWorldClocks();
     checkServiceStatus();
     initMatrixBackground();
+    initPerformanceMode();
+    initSidebarNotes();
 
     // Render Content (Reordered)
     const content = document.getElementById('content');
     if (content) {
         // Order: Admins -> Inventario -> Servers -> Monitoring -> Sheets
+        // (IT Tools moved to permanent right sidebar)
         const orderedContent = [
             sections.admins,
             sections.inventario,
@@ -527,15 +926,20 @@ document.addEventListener('DOMContentLoaded', () => {
         content.innerHTML = orderedContent.join('');
     }
 
+    // Init right sidebar AFTER content is rendered (snippets containers exist in sidebar HTML)
+    initITSnippets();
+    initRightSidebar();
+    detectClientIP();
+
     // Simulate stats
     setTimeout(() => {
         animateCount('tickets-count', 12);
-        animateCount('users-count', 280); // Updated
-        animateCount('assets-count', 614); // Updated
+        animateCount('users-count', 280);
+        animateCount('assets-count', 614);
     }, 500);
 
     // Interval updates
     setInterval(updateDateTime, 60000);
-    setInterval(updateWorldClocks, 1000); // Update clocks every second
+    setInterval(updateWorldClocks, 30000); // Update clocks every 30 seconds
     setInterval(checkServiceStatus, 60000); // Check status every minute
 });
