@@ -22,11 +22,14 @@
                 </div>
             </div>
 
-            <!-- Sidebar Widget (Tasks & Sticky Notes) -->
+            <!-- Sidebar Widget (Tasks, Projects & Sticky Notes) -->
             <div class="sidebar-widget">
                 <div class="widget-switcher">
                     <button id="switch-tasks-btn" class="switch-btn active" onclick="switchWidget('tasks')">
                         <i class="fas fa-check-square"></i> Tareas
+                    </button>
+                    <button id="switch-projects-btn" class="switch-btn" onclick="switchWidget('projects')">
+                        <i class="fas fa-diagram-project"></i> Proyectos
                     </button>
                     <button id="switch-notes-btn" class="switch-btn" onclick="switchWidget('notes')">
                         <i class="fas fa-sticky-note"></i> Notas
@@ -36,17 +39,35 @@
                 <!-- Tasks Section -->
                 <div id="tasks-section" class="widget-section active">
                     <div class="task-input-group">
-                        <input type="text" id="task-input" class="task-input" placeholder="Nueva tarea...">
-                        <button id="task-add-btn" class="task-add-btn"><i class="fas fa-plus"></i></button>
+                        <input type="text" id="task-input" class="task-input" placeholder="Nueva tarea rápida...">
+                        <button id="task-add-btn" class="task-add-btn" title="Agregar tarea"><i class="fas fa-plus"></i></button>
                     </div>
                     <ul id="task-list" class="task-list">
                         <!-- Tasks will be added here -->
                     </ul>
                 </div>
+
+                <!-- Projects Section -->
+                <div id="projects-section" class="widget-section">
+                    <div class="project-input-group">
+                        <input type="text" id="project-name-input" class="task-input" placeholder="Nombre del proyecto/hito...">
+                        <div class="project-controls-row">
+                            <select id="project-status-select" class="project-select">
+                                <option value="progress">⚡ En curso</option>
+                                <option value="pending">⏳ Pendiente</option>
+                                <option value="done">✅ Listo</option>
+                            </select>
+                            <button id="project-add-btn" class="task-add-btn" title="Guardar proyecto"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <ul id="project-list" class="project-list">
+                        <!-- Projects will be added here -->
+                    </ul>
+                </div>
                 
                 <!-- Notes Section -->
                 <div id="notes-section" class="widget-section">
-                    <textarea id="notes-input" class="notes-textarea" placeholder="Escribe notas rápidas de IT aquí (se guardan automáticamente)..."></textarea>
+                    <textarea id="notes-input" class="notes-textarea" placeholder="Escribe notas rápidas de IT aquí (se guardan automáticamente en tu navegador)..."></textarea>
                 </div>
             </div>
 
@@ -78,7 +99,7 @@
                     <button class="tools-toggle-btn" onclick="toggleRightSidebar()" title="Mostrar/Ocultar Herramientas">
                         <i class="fas fa-toolbox"></i>
                     </button>
-                    <a href="https://meet.google.com/xsq-jwpw-mpp?authuser=0" target="_blank" class="meet-btn">
+                    <a href="https://meet.google.com/xsq-jwpw-mpp?authuser=0" target="_blank" class="meet-btn" title="Meet del equipo IT">
                         <i class="fas fa-phone"></i>
                         <span>Panas Team</span>
                     </a>
@@ -106,7 +127,7 @@
                             <p>Servidores Activos</p>
                         </div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" title="Conectar a Google Workspace API">
                         <div class="stat-icon purple">
                             <i class="fas fa-users"></i>
                         </div>
@@ -115,7 +136,7 @@
                             <p>Usuarios Activos</p>
                         </div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" title="Conectar a Snipe-IT API">
                         <div class="stat-icon orange">
                             <i class="fas fa-box"></i>
                         </div>
@@ -143,8 +164,19 @@
                         </div>
                     </div>
 
+                    <!-- Tip del Día IT -->
+                    <div class="widget tip-widget">
+                        <div class="tip-widget-header">
+                            <h3><i class="fas fa-lightbulb"></i> Tip del Día IT</h3>
+                            <button id="next-tip-btn" class="tip-rotate-btn" onclick="rotateItTip()" title="Ver otro tip"><i class="fas fa-shuffle"></i></button>
+                        </div>
+                        <div id="it-tip-container" class="it-tip-content">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
                     <div class="widget">
-                        <h3>Últimas Noticias</h3>
+                        <h3>Últimas Noticias Tech</h3>
                         <div id="news"></div>
                     </div>
 
@@ -167,7 +199,7 @@
 
                 <footer class="footer">
                     <div class="footer-text">
-                        Hecho con <i class="fas fa-heart heart-icon"></i> por los Panas de Soporte Inyinius | 2025
+                        Hecho con <i class="fas fa-heart heart-icon"></i> por los Panas de Soporte Inyinius | 2026
                     </div>
                 </footer>
             </main>
